@@ -4,18 +4,18 @@ import {ProductService} from '/src/services/index.js'
 const useProductStore = (set, get)=>({
     isLoadingProducts: false,
     product:[],
-    currentPage: 1,
     isAtEnd: false,
+   totalProducts:0,
 
-    async loadProducts(country,category_id){
+    async loadProducts(country,category_id,page,pageSize){
 
         const isAtEnd = get().isAtEnd
-        const currentPage = get().currentPage
+
 
 
 
         if(isAtEnd){
-            console.log("errrororr")
+
             return;
         }
 
@@ -23,12 +23,12 @@ const useProductStore = (set, get)=>({
             isLoadingProducts: true,
         })
 
-        console.log("Loading products...")
 
 
-        const response = await ProductService.Products(country,category_id);
 
-        console.log('responseRes',response)
+        const response = await ProductService.Products(country,category_id,page,pageSize);
+
+
 
         set({
             isLoadingProducts: false
@@ -43,15 +43,18 @@ const useProductStore = (set, get)=>({
             set({
                 isAtEnd: true,
             });
-            console.log("No more data available")
+
 
         }
-        console.log("Updating products...");
+
         set({
-            currentPage: currentPage + 1,
-            product:[...get().product,...response.products]
+            isLoadingProducts: false,
+            currentPage: response.current_page,
+            totalProducts: response.total,
+            product: [...get().product, ...response.products],
+
         })
-        console.log("Products updated successfully")
+
     },
     async resetProducts() {
         set({

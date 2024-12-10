@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Card = ({ image, title, price ,id}) => {
+const Card = ({ image, title, price }) => {
     return (
         <CardWrap >
-            <div className="card-image">
-                <img src={image} alt={title} style={{borderRadius:'20px'}} />
+            <div className="cardImage">
+                <img src={image} alt={title} style={{borderRadius:'20px',height:'180px'}} />
             </div>
-            <div className="card-content">
-                <h3 className="card-title">{title}</h3>
-                <p className="card-description">{price}</p>
+            <div className="cardContent">
+                <h3 className="cardTitle">{title}</h3>
+                <p className="cardDescription">{price}</p>
             </div>
         </CardWrap>
     );
@@ -35,27 +35,28 @@ const CardWrap = styled.div`
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
 
-  .card-image img {
+  .cardImage img {
     width: 100%;
-   
+   height: auto;
     
   }
 
-  .card-content {
+  .cardContent {
     padding: 16px;
   }
 
-  .card-title {
+  .cardTitle {
     font-size: 1.25rem;
     font-weight: bold;
     margin: 0 0 8px 0;
     color: #ffffff;
   }
 
-  .card-description {
+  .cardDescription {
     font-size: 1rem;
     color: #ffffff;
     line-height: 1.5;
+    padding-bottom: 10px;
   }
 `
 

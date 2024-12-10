@@ -9,18 +9,18 @@ const useCategorieStore = (set, get) => ({
         set({
             isLoad: true
         })
-        console.log('countri1')
+
         const response = await CategoryService.Categories();
-        console.log('request', response);
-        console.log('countri2')
+
+
         set({
             isLoad: false,
         })
-        console.log('countri3')
+
         if (response.error) {
             return console.log("Error response")
         }
-        console.log('countri4')
+
         set({
             categories: response.categories
         })

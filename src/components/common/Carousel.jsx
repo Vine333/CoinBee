@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "./Card";
 
 const Carousel = ({ cards }) => {
-    const [currentIndex, setCurrentIndex] = useState(1); // Центральная карточка
+    const [currentIndex, setCurrentIndex] = useState(1);
 
     const handleNext = () => {
         setCurrentIndex((prevIndex) =>
@@ -26,7 +26,7 @@ const Carousel = ({ cards }) => {
                 {cards.map((card, index) => {
                     let positionClass = "";
 
-                    // Определяем, какая карточка будет центральной, и какие будут боковыми
+
                     if (index === currentIndex) positionClass = "center";
                     else if (index === currentIndex - 1 || (currentIndex === 0 && index === cards.length - 1)) positionClass = "prev";
                     else if (index === currentIndex + 1 || (currentIndex === cards.length - 1 && index === 0)) positionClass = "next";
@@ -51,7 +51,7 @@ const CarouselWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1050px;
   margin: 0 auto;
   overflow: hidden;
   height: 450px;
@@ -72,7 +72,7 @@ const CardWrapper = styled.div`
   opacity: 0;
 
   &.center {
-    transform: scale(1.2) translateY(-20px);
+    transform: scale(1.2) translateY(0px);
     z-index: 3;
     opacity: 1;
   }

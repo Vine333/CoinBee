@@ -1,158 +1,118 @@
-import React, {useEffect, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from "styled-components";
-import {StarIC, StarHalfIC} from '/src/assets/SVG/Icons/index.js'
-import {useShallow} from "zustand/react/shallow";
-import {useProductStore, useCountryStore, useCategorieStore, GlobalStore} from '/src/store/index.js'
+import {StarIC, StarHalfIC} from '/src/assets/SVG/Icons/index.js';
 import AppLayout from "../../layouts/index.jsx";
-import Card from '/src/components/common/Card.jsx'
-import Carousel from "../../components/common/Carousel.jsx";
-import Crypto from "../../components/common/Crypto.jsx";
+import {Data} from "../../config/data.js";
+import items from '/src/config/Accardion.js';
+import {
+    Carousel, Payments, GiftCardForCommerce, YellowComponent, SectionVideo, SectionSteps, Review, FAQ, Footer
+} from "/src/components/common/index.js";
+import Cards from '/src/config/Cards.js';
+import {useNavigate} from "react-router-dom";
+import {useLanguage} from "../../components/CustomHook/LanguageContext.jsx";
 
 
 const MainPage = () => {
-    const {
-        selectedCountry,
+    const navigate = useNavigate();
+    const { __i} = useLanguage();
+    const sectionRef = useRef(null);
 
-        selectedCategory,
-
-        currentPage,
-        setCurrentPage
-    } = GlobalStore();
-
-
-    const {isLoad, categories, loadCategories} = useCategorieStore(useShallow(state => ({
-        isLoad: state.isLoad, categories: state.categories, loadCategories: state.loadCategories
-
-    })))
-    const {product, loadProducts, resetProducts} = useProductStore(useShallow(state => ({
-
-        product: state.product,
-        loadProducts: state.loadProducts,
-        resetProducts: state.resetProducts
-    })))
-
-
-    const [pageSize] = useState(4);
-
-
-    useEffect(() => {
-        if (selectedCountry && selectedCategory) {
-            resetProducts();
-            loadProducts(selectedCountry, selectedCategory)
-            console.log(product)
+    const scrollToSection = () => {
+        if (sectionRef.current) {
+            sectionRef.current.scrollIntoView({behavior: 'smooth'});
         }
-    }, [selectedCountry, selectedCategory])
-
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-        loadProducts(selectedCountry, selectedCategory);
-        console.log("handlePageChange", product)
     };
 
-    const endIndex = currentPage * pageSize;
-    const startIndex = endIndex - pageSize;
-    // const paginatedProducts = product.slice(startIndex, endIndex);
-const cards =[
-    { title:'FORTNITE',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Fortnite.png'},
-    { title:'FREEFIRE',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Free-Fire.png'},
-    { title:'PUBG',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/PUBG.png'},
-    { title:'Bigo Live',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Bigo-Live.png'},
-    { title:'Mobile Legends',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Mobile-Legends.png'},
-    { title:'Stripchat',  price:'USD 1.00 - 500.00', image:'https://cdn.coinsbee.com/version2/dist/assets/img/brands/Stripchat.png'},
+    const onNavigateShop = () => {
+        navigate('/shop');
+    };
+    const localizedData = Data(__i);
+    //  todo классы с маленькой camelCase
 
-]
-
-    return (
-        <AppLayout>
-            <Wrapper>
-                <div className='Container'>
-                    <div className='FlexContainer'>
-
-
-                        <div className='Description_mainContent'>
-                            <h1>Покупайте подарочные карты за биткоины или другие криптовалюты</h1>
-                            <p>На Coinsbee.com вы можете купить платежные карты, мобильные пополнения или подарочные
-                                карты с
-                                помощью биткоина или других криптовалют. Более 4000 брендов, доступных в более чем 185
-                                странах. Простая, быстрая и безопасная оплата с помощью более 200 различных криптовалют,
-                                Mastercard, Visa и других способов оплаты.</p>
-
-                            <a role='button' className='BtnAMineContent'>Посмотреть все</a>
-
-                        </div>
-                        <div className='Carousel'>
-                            <Carousel cards={cards} />
-                        </div>
+    return (<AppLayout>
+        <Wrapper>
+            <div className='container'>
+                <div className='flexContainer'>
+                    <div className='descriptionMainContent'>
+                        <h1>{__i("Buy Gift Cards with Crypto")}</h1>
+                        <p>{__i('At Coinsbee.com you can buy payment cards, mobile top-ups or gift cards with Bitcoin or other cryptocurrencies. More than 4000 brands available in over 185 countries. Easy, fast and secure payment with over 200 different cryptocurrencies, Mastercard, Visa and other payment methods')}</p>
+                        <a role='button' className='btnAMineContent'
+                           onClick={onNavigateShop}>{__i('Browse All')}</a>
                     </div>
-                    <div className='LogoBTC'>
-
-                        <a href="" className='LinkBTC'>
-                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/beincrypto.svg' alt=""/>
-                        </a>
-                        <a href="" className='LinkBTC'>
-                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-com.svg' alt=""/>
-                        </a>
-                        <a href="" className='LinkBTC'>
-                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-magazine.svg' width='170px'
-                                 height='25px' alt=""/>
-                        </a>
-                        <a href="" className='LinkBTC'>
-                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitecho.svg' alt=""/>
-                        </a>
-                        <a href="" className='LinkBTC'>
-                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/newsbtc.svg' alt=""/>
-                        </a>
-
-
-                    </div>
-
-                    <div className='Rate'>
-                        <div className='NumberWithStar'>
-                            <span className='number'>4.5/5</span>
-                            <ul>
-                                <li className='LiStar'>
-                                    <StarIC/>
-                                </li>
-                                <li className='LiStar'>
-                                    <StarIC/>
-                                </li>
-                                <li className='LiStar'>
-                                    <StarIC/>
-                                </li>
-                                <li className='LiStar'>
-                                    <StarIC/>
-                                </li>
-                                <li className='LiStar'>
-                                    <StarHalfIC/>
-                                </li>
-                            </ul>
-                        </div>
-                        <span>
-                            <div>
-                        <a role='button' className='Trust'> Доверяют 500 000+ пользователей</a>
-                        <br className='br'/>
-                        <span style={{margin: "0 8px", color: 'gray'}}>из 185+ стран</span>
-                        </div>
-                    </span>
-
+                    <div className='carousel'>
+                        <Carousel cards={Cards}/>
                     </div>
                 </div>
-
-
-                        <Crypto className='PayGiftCard'/>
-
-
-            </Wrapper>
-        </AppLayout>
-    );
+                <div className='logoBTC'>
+                    <a href="" className='linkBTC'>
+                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/beincrypto.svg' alt=""/>
+                    </a>
+                    <a href="" className='linkBTC'>
+                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-com.svg' alt=""/>
+                    </a>
+                    <a href="" className='linkBTC'>
+                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-magazine.svg' width='170px'
+                             height='25px' alt=""/>
+                    </a>
+                    <a href="" className='linkBTC'>
+                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitecho.svg' alt=""/>
+                    </a>
+                    <a href="" className='linkBTC'>
+                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/newsbtc.svg' alt=""/>
+                    </a>
+                </div>
+                <div className='rate'>
+                    <div className='numberWithStar'>
+                        <span className='number'>4.2/5</span>
+                        <ul>
+                            <li className='liStar'>
+                                <StarIC/>
+                            </li>
+                            <li className='liStar'>
+                                <StarIC/>
+                            </li>
+                            <li className='liStar'>
+                                <StarIC/>
+                            </li>
+                            <li className='liStar'>
+                                <StarIC/>
+                            </li>
+                            <li className='liStar'>
+                                <StarHalfIC/>
+                            </li>
+                        </ul>
+                    </div>
+                    <span>
+                            <div>
+                                <a role='button' className='trust'
+                                   onClick={scrollToSection}> {__i('Trusted by 500,000+ users')}</a>
+                                <br className='br'/>
+                                <span
+                                    style={{margin: "0 8px", color: 'gray'}}>{__i('from 185+ countries')}</span>
+                            </div>
+                        </span>
+                </div>
+            </div>
+            <Payments className='payGiftCard'/>
+            {localizedData.map((item, index) => (<GiftCardForCommerce key={index} item={item}/>))}
+            <YellowComponent/>
+            <SectionVideo/>
+            <SectionSteps/>
+            <Review ref={sectionRef}/>
+            <h2 style={{fontSize: '30px'}}>FAQ</h2>
+            <FAQ items={items} language={__i}/>
+            <Footer/>
+        </Wrapper>
+    </AppLayout>);
 };
 
 const Wrapper = styled.div`
   width: 100%;
-  .PayGiftCard{
-   
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   .item {
     display: flex;
     justify-content: center;
@@ -173,7 +133,7 @@ const Wrapper = styled.div`
     background: #211123;
   }
 
-  .LiStar {
+  .liStar {
     list-style: none;
   }
 
@@ -183,7 +143,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .BtnAMineContent {
+  .btnAMineContent {
     font-size: 21px;
     background-color: #fbcc0d;
     border: none;
@@ -194,7 +154,6 @@ const Wrapper = styled.div`
     text-align: center;
     text-decoration: none;
     display: inline-block;
-
     cursor: pointer;
     margin: 3px;
     border-radius: 35px;
@@ -204,34 +163,31 @@ const Wrapper = styled.div`
       scale: 110%;
       background-color: #fbcc0d;
       box-shadow: 0 0 2px rgba(251, 204, 13, 60%), 0 0 20px rgba(251, 204, 13, 60%);
-
-
     }
   }
 
-  .Trust {
+  .trust {
     text-decoration: black underline;
     color: gray;
     width: 100%;
   }
 
-  .NumberWithStar {
+  .numberWithStar {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 10px;
   }
 
-  .FlexContainer {
+  .flexContainer {
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding-bottom: 20px;
-
   }
 
-  .LinkBTC {
+  .linkBTC {
     margin: 8px 25px;
 
     img {
@@ -241,7 +197,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .Description_mainContent {
+  .descriptionMainContent {
     flex: 0 0 40%;
     order: 1;
     width: 50%;
@@ -257,17 +213,16 @@ const Wrapper = styled.div`
     p {
       font-size: 20px;
     }
-
   }
 
-  .LogoBTC {
+  .logoBTC {
     order: 3;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
 
-  .Rate {
+  .rate {
     order: 4;
     display: flex;
     justify-content: center;
@@ -282,7 +237,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .Carousel {
+  .carousel {
     flex: 1 1 60%;
     order: 2;
     width: 100%;
@@ -291,13 +246,12 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 
-  .Container {
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 3rem;
-  
   }
 
   .number {

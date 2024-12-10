@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout} from "antd";
 import styled from "styled-components";
 import Header from '/src/components/common/Header.jsx'
+
 const {Content} = Layout;
 
 
@@ -14,11 +15,10 @@ const AppLayout = ({children}) => {
 
             <Header/>
 
-            <Content style={{
-                overflow: 'auto',
-            }}>
+            <Content>
                 {children}
             </Content>
+
         </Wrapper>
     );
 };

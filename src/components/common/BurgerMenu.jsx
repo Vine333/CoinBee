@@ -1,61 +1,109 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import {Phone,Game} from '/src/assets/SVG/Icons/index.js'
-
+import {ICPayment,ICGame ,ICSoft,ICEnviro,ICCrypto,ICShop,ICFood  } from '/src/assets/SVG/Icons/index.js'
+import {useNavigate} from "react-router-dom";
+import {GlobalStore} from "../../store/index.js";
+import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 
 const BurgerMenu = () => {
+
+
+
+    const navigate = useNavigate();
+
+    const menuRef = useRef(null);
+
+    const {__i} =useLanguage();
+
+    const {
+        setSelectedCategory,
+    } = GlobalStore();
+
+    const onNavigateShop = (categoryId)=>{
+        navigate('/shop');
+        setSelectedCategory(categoryId)
+    }
+
     const [isOpen, setIsOpen] = useState(false);
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    return (<Wrapper>
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <Wrapper>
             <BurgerIcon onClick={toggleMenu} isOpen={isOpen}>
                 <div></div>
                 <div></div>
                 <div></div>
             </BurgerIcon>
-            <Menu isOpen={isOpen}>
-                <li className='ListItem'>
-                    <a>
-                    <img src="https://cdn.coinsbee.com/dist/assets/img/categories/mobile-recharge.svg" alt="" style={{width:'20px',height:'30px'}}/>
-                    <div className='Naming'>Пополнение баланса мобильного телефона</div>
-                    <div className='Number'>4</div>
-                </a>
-                </li>
-                <li className='ListItem'>
-                    <a>
-                        <img src="https://cdn.coinsbee.com/dist/assets/img/categories/games.svg" alt={'IC'} style={{width:'20px',height:'14px'}}/>
-                        <div className='Naming'>Игры</div>
-                        <div className='Number'>29</div>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <img src="https://cdn.coinsbee.com/dist/assets/img/categories/entertainment.svg" alt="" style={{width:'20px',height:'23px'}}/>
-                        <div className='Naming'>Развлечения</div>
-                        <div className='Number'>12</div>
-                        </a>
-                </li>
-                <li className='ListItem'>
-                    <a>
-                        <img src="https://cdn.coinsbee.com/dist/assets/img/categories/payment-cards.svg" alt="" style={{width:'20px',height:'20px'}}/>
-                        <div className='Naming'> Платежные Карты</div>
-                        <div className='Number'> 4</div>
+            <Menu ref={menuRef} isOpen={isOpen}>
+                <li className='listItem'>
+                    <a  onClick={() =>onNavigateShop(1)}>
+                        <ICPayment/>
+                        <div className='naming'>  {__i( "Payment Cards")}</div>
 
                     </a>
                 </li>
-                <li className='ListItem'>
-                    <a>
-                        <img src="https://cdn.coinsbee.com/dist/assets/img/categories/crypto.svg" alt="" style={{width:'20px',height:'20px'}}/>
-                        <div className='Naming'> Криптовалюта</div>
-                        <div className='Number'>3</div>
+                <li className='listItem'>
+                    <a onClick={() =>onNavigateShop(2)}>
+                        <ICSoft/>
+                        <div className='naming'>  {__i( "Software")}</div>
+
+                    </a>
+                </li>
+                <li>
+                    <a onClick={() =>onNavigateShop(3)}>
+                        <ICGame/>
+                        <div className='naming'>{__i( "Games")}</div>
+
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() =>onNavigateShop(4)}>
+                        <ICFood/>
+                        <div className='naming'>    {__i( "Food and Entertainment")}</div>
+
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() =>onNavigateShop(5)}>
+                        <ICShop/>
+                        <div className='naming'>  {__i( "Shopping")}</div>
+
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() =>onNavigateShop(6)}>
+                        <ICCrypto/>
+                        <div className='naming'>  {__i( "Cryptocurrency")}</div>
+
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() =>onNavigateShop(7)}>
+                        <ICEnviro/>
+                        <div className='naming'>  {__i( "Ecology")}</div>
 
                     </a>
                 </li>
             </Menu>
-        </Wrapper>);
+        </Wrapper>
+    );
 };
 
 export default BurgerMenu;
@@ -74,7 +122,6 @@ const BurgerIcon = styled.div`
   width: 30px;
   height: 25px;
   cursor: pointer;
-  
 
   div {
     width: 100%;
@@ -82,15 +129,14 @@ const BurgerIcon = styled.div`
     background-color: #333;
     transition: all 0.3s;
 
-
-    &:nth-child(1) { 
+    &:nth-child(1) {
       transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg) translate(5px, 7px)' : 'rotate(0)')}
-     } 
-    &:nth-child(2) { 
-      opacity: ${({ isOpen }) => (isOpen ? 0 : 1)}; 
-      transform: ${({ isOpen }) => (isOpen ? 'translateX(-20px)' : 'translateX(0)')}; 
-      transition: transform 0.3s, opacity 0.3s; 
-    } 
+    }
+    &:nth-child(2) {
+      opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+      transform: ${({ isOpen }) => (isOpen ? 'translateX(-20px)' : 'translateX(0)')};
+      transition: transform 0.3s, opacity 0.3s;
+    }
     &:nth-child(3) { transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg) translate(4px, -7px)' : 'rotate(0)')};
     }
   }
@@ -108,14 +154,17 @@ const Menu = styled.ul`
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 500px;
   height: auto;
+  z-index: 100;
+
   li {
     margin: 15px 15px;
-    
   }
-  .Number{
+
+  .number {
     color: #fbcc0d;
   }
-  .Naming{
+
+  .naming {
     display: flex;
     align-items: flex-start;
     flex: 1 1 50%;
@@ -132,21 +181,20 @@ const Menu = styled.ul`
     justify-content: space-between;
     align-items: center;
     position: relative;
-  &::after{
-    content: ''; /* обязательный контент для псевдоэлемента */
-    position: absolute;
-    bottom: 0; /* фиксируем внизу */
-    left: 0;
-    width: 100%; /* занимает всю ширину блока */
-    height: 2px; /* высота линии */
-    background-color: transparent; /* по умолчанию прозрачная */
-    transition: background-color 0.3s ease; /* плавная анимация */
-  }
-    &:hover::after{
-      background-color: #fbcc0d
+
+    &::after {
+      content: ''; 
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%; 
+      height: 2px;
+      background-color: transparent; 
+      transition: background-color 0.3s ease; 
+    }
+
+    &:hover::after {
+      background-color: #fbcc0d;
     }
   }
- 
-  
-  
 `;

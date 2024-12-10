@@ -1,252 +1,125 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Global, Logo} from '/src/assets/SVG/Icons/index.js'
-import{Select,Space,Spin} from "antd";
+import {Select, Space, Spin} from "antd";
 import {ShoppingCartOutlined, UserOutlined, SearchOutlined} from '@ant-design/icons'
-import BurgerMenu from "./BurgerMenu.jsx";
 import Button from "./Button.jsx";
-import {GlobalStore, useCategorieStore, useCountryStore, useProductStore} from "../../store/index.js";
+import {GlobalStore,useCountryStore,} from "../../store/index.js";
 import Modal from "./Modal.jsx";
 import {useShallow} from "zustand/react/shallow";
+import {useNavigate} from "react-router-dom";
+import Menu from '/src/components/common/NavMenu.jsx'
+import {useLanguage} from "../CustomHook/LanguageContext.jsx";
+
+
 
 
 const Header = () => {
+
+    const navigate = useNavigate()
+    const {changeLanguage, __i } = useLanguage();
+
+    const {
+        selectedCountry, setSelectedCountry,
+    } = GlobalStore();
 
     const {isLoading, countries, loadCountry} = useCountryStore(useShallow(state => ({
         isLoading: state.isLoading, countries: state.countries, loadCountry: state.loadCountry,
     })));
 
+    const [modalActive, setModalActive] = useState(false)
 
-    const {isLoad, categories, loadCategories} = useCategorieStore(useShallow(state => ({
-        isLoad: state.isLoad, categories: state.categories, loadCategories: state.loadCategories
-
-    })))
-    const {isLoadingProducts, product, loadProducts, resetProducts} = useProductStore(useShallow(state => ({
-        isLoadingProducts: state.isLoadingProducts,
-        product: state.product,
-        loadProducts: state.loadProducts,
-        resetProducts: state.resetProducts
-    })))
-    const [modalActive,setModalActive]=useState(true)
-    useEffect(()=>{
-        loadCategories();
+    useEffect(() => {
         loadCountry();
-    },[])
-    const {
-        selectedCountry,
-        setSelectedCountry,
-        selectedCategory,
-        setSelectedCategory,
-        currentPage,
-        setCurrentPage
-    } = GlobalStore();
+    }, [])
+
+
     const handleCountryChange = (value) => {
         setSelectedCountry(value);
-        setCurrentPage(1);
+
+
         console.log(`Selected country: ${value}`);
     };
-    const handleCategoryChange = (value) => {
-        setSelectedCategory(value);
-        setCurrentPage(1);
-        console.log(`Selected category: ${value}`);
-    };
+
+const NavigateToAuth = ()=>{
+    navigate('/login')
+}
+
+    const onNavigateHome= ()=>{
+        navigate('/',{
+            replace:true,
+        })
+    }
 
 
-    return (
-        <>
-        <Wrapper>
-            <div className='Logo'>
-                <Logo/>
-            </div>
-            <div className='Search'>
-                <input placeholder='xyli nado dog?' className='Input'>
 
-                </input>
-                <button className='BtnInput'>
-                    <SearchOutlined/>
-                </button>
-            </div>
-            <div className="BtnInHeader">
-                <Button className='Btn Global' onClick={()=>setModalActive(true)}>
-                    <Global />
-                </Button>
 
-                <Button className='Btn User'>
-                    <UserOutlined/>
-                </Button>
+    return (<>
 
-                <Button className='Btn Shopping'>
+            <Wrapper>
+                <div className='logo' onClick={onNavigateHome}>
+                    <Logo/>
+                </div>
+                <div className='search'>
+                    <input placeholder={__i("What are you looking for?")} className='input'>
 
-                    <ShoppingCartOutlined/>
-                </Button>
+                    </input>
+                    <button className='btnInput'>
+                        <SearchOutlined/>
+                    </button>
+                </div>
+                <div className="btnInHeader">
+                    <Button className='btn Global' onClick={() => setModalActive(true)}>
+                        <Global/>
+                    </Button>
 
-            </div>
-        </Wrapper>
-            <Modal  active={modalActive} setActive={setModalActive}>
-                <Select showSearch style={{width: '100%',marginBottom:'10px'}}
-                        placeholder="Выберите страну"
+                    <Button className='btn User' onClick={NavigateToAuth}>
+                        <UserOutlined/>
+                    </Button>
+
+                    <Button className='btn Shopping'>
+
+                        <ShoppingCartOutlined/>
+                    </Button>
+
+                </div>
+            </Wrapper>
+            <Modal active={modalActive} setActive={setModalActive}>
+                <h2>{__i("Country and Language")}</h2>
+                <Select showSearch
+                        style={{width: '100%', marginBottom: '10px'}}
+                        placeholder={__i('Choices Country')}
                         optionFilterProp="children"
+                        value={selectedCountry}
                         onChange={handleCountryChange}
                         loading={isLoading}
-
-
+                        filterOption={(input, option) => option.label.toLowerCase().includes(input.toLowerCase())}
                         notFoundContent={isLoading ? <Spin size="small"/> : 'Нет данных'}>
-                    {countries.map(country => (
-                        <Select.Option key={country.id} value={country.iso_name}>
+
+                          {countries.map(country => (
+
+                        <Select.Option key={country.id} value={country.iso_name} label={country.name}>
                             <Space>
                                 <img src={country.flag_url}
-                                     alt={country.name} style={{width:'20px',marginRight:'8px'}}/>
+                                     alt={country.name} style={{width: '20px', marginRight: '8px'}}/>
                                 {country.name}
                                 ({country.currency_code})
                             </Space>
-                        </Select.Option>
-                    ))}
+                        </Select.Option>))}
                 </Select>
-                <Select showSearch style={{width: '100%'}}
-                        placeholder="Выберите категорию"
-                        optionFilterProp="children"
-                        onChange={handleCategoryChange}
-                        loading={isLoad}
-                        notFoundContent={isLoad ? <Spin size="small"/> : 'Нет данных'}>
-                    {categories.map(categories => (
-                        <Select.Option key={categories.id} value={categories.id}>
-                            <Space>
-                                <img src={categories.icon_url}
-                                     alt={categories.name} style={{width:'20px',marginRight:'8px'}}/>
-                                {categories.name}
-                            </Space>
-                        </Select.Option>
-
-                    ))}
-                </Select>
+                <Select
+                    defaultValue={localStorage.getItem('language')}
+                    onChange={changeLanguage}
+                    style={{width: '100%'}}
+                    options={[{value: 'ru', label: 'Русский'}, {value: 'en', label: 'English'},]}
+                />
             </Modal>
-            <NavMenu >
-
-                   <div className='BurgerMenu'>
-                       <BurgerMenu/>
-                   </div>
-                    <ul className='NavLinks'>
-                        <li className='ListItemAllProducts'>
-                            <a className='LinksCategory'>
-
-                                Все продукты
-                            </a>
-                        </li>
-                        <li className='ListItemMobil'>
-                            <a className='LinksCategory'>
-                                Пополнение баланса мобильного телефона
-                            </a>
-                        </li>
-                        <li className='ListItemGame'>
-                            <a className='LinksCategory'>
-                                Игры
-                            </a>
-                        </li>
-                        <li className='ListItemPlayGame'>
-                            <a className='LinksCategory'>
-                                Развлечения
-                            </a>
-                        </li>
-                        <li className='ListItemCart'>
-                            <a className='LinksCategory'>
-                                Платежные Карты
-                            </a>
-                        </li>
-                        <li className='ListItemCrypto'>
-                            <a className='LinksCategory'>
-                                Криптовалюта
-                            </a>
-                        </li>
-
-                    </ul>
-
-            </NavMenu>
-
-</>
-    );
+        <Menu/>
+        </>);
 };
 
-const NavMenu = styled.div`
-background-color: #fbcc0d;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  width: 100%;
-  align-items: flex-start;
-  height: 50px;
-  .NavLinks{
-    text-decoration: none;
-    list-style: none;
-    flex:1 1 70%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    
-  }
-  .LinksCategory{
-    font-size: 20px;
-    display: block;
-    padding: 8px;
-    color: black;
-    position: relative;
-    white-space: nowrap;
-    overflow: hidden;
-  width: auto;
-    &::after{
-      content: ''; 
-      position: absolute;
-      bottom: 0; 
-      left: 0;
-      height: 1px; 
-      width: 0; 
-      background-color: black; 
-      transition: all 0.3s ease;
-      transform-origin: left; 
-    }
-    &:hover::after{
-      
-        width: 100%; 
-      
-    }
-    &::after{
-      transition: width 0.4s ease-in-out;
-    }
-  }
-  @media(max-width:1139px ){
-    .ListItemCrypto{
-      display: none;
-    }
-  }
-  @media(max-width:991px ){
-    .ListItemCart{
-      display: none;
-    }
-   
-  }
-  @media(max-width:809px ){
-    .ListItemPlayGame{
-      display: none;
-    }
 
-  }
-  @media(max-width:676px ){
-    .ListItemGame{
-      display: none;
-    }
-    
 
-  } 
-  @media(max-width:618px ){
-    .ListItemMobil{
-      display: none;
-    }
-    
-
-  }
-`
 const Wrapper = styled.div`
   width: 100%;
   height: auto;
@@ -258,11 +131,13 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   box-sizing: border-box;
 
-  .Logo {
+  
+  .logo {
     width: 25%;
+    cursor: pointer;
   }
 
-  .Search {
+  .search {
     text-align: center;
     width: 50%;
 
@@ -271,13 +146,14 @@ const Wrapper = styled.div`
   .Global {
 
     background-color: aliceblue;
+
     &:hover {
       background-color: rgba(240, 248, 255, 0.74);
       box-shadow: none;
     }
   }
 
-  .Btn {
+  .btn {
 
     border: none;
     color: black;
@@ -307,7 +183,6 @@ const Wrapper = styled.div`
 
   }
 
-  
 
   .User {
     color: black;
@@ -320,7 +195,7 @@ const Wrapper = styled.div`
     }
   }
 
-  .Search {
+  .search {
 
     display: flex;
     align-items: center;
@@ -330,7 +205,7 @@ const Wrapper = styled.div`
 
   }
 
-  .Input {
+  .input {
 
     height: 46px;
     border: none;
@@ -348,7 +223,7 @@ const Wrapper = styled.div`
 
   }
 
-  .BtnInput {
+  .btnInput {
     height: 46px;
     background-color: #fbcc0d;
     border: none;
@@ -367,20 +242,20 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: 991px) {
-    .Logo {
+    .logo {
       order: 1;
       flex: 1 1 50%;
     }
 
     padding: 8px;
     transition: all 0.5s;
-    .Search {
+    .search {
       order: 3;
       flex: 1 1 100%;
 
     }
 
-    .BtnInHeader {
+    .btnInHeader {
       order: 2;
       flex: 1 1 50%;
       justify-content: end;

@@ -4,6 +4,7 @@ const GlobalStore=(set)=>({
     currentPage:1,
     selectedCountry: [],
     selectedCategory: [],
+
     setSelectedCountry: (country) => set({ selectedCountry: country }),
     setSelectedCategory: (category_id) => set({ selectedCategory: category_id }),
     setCurrentPage: (page) => set({ currentPage: page }),

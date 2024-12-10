@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Card from "./Card";
 
 
-const Carousel2 = ({card}) => {
-    const [currentIndex, setCurrentIndex] = useState(0); // Первая карточка
+const CarouselForMain = ({card}) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
         setCurrentIndex((prevIndex) =>
@@ -31,7 +31,7 @@ const Carousel2 = ({card}) => {
             </Button>
             <CardsContainer>
                 {visibleCards.map((card) => (
-                    <CardWrapper key={card.id}>
+                    <CardWrapper key={card.id} >
                         <Card {...card} />
                     </CardWrapper>
                 ))}
@@ -92,4 +92,4 @@ const Button = styled.button`
   }
 `;
 
-export default Carousel2;
+export default CarouselForMain;
