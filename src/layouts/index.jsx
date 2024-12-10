@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout} from "antd";
 import styled from "styled-components";
-import Header from '/src/components/common/Header.jsx'
+import Header from '../components/common/Header.jsx'
 
 const {Content} = Layout;
 

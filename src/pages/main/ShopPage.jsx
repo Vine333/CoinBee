@@ -5,6 +5,7 @@ import { GlobalStore, useProductStore, useCountryStore, useCategorieStore } from
 import { useShallow } from 'zustand/react/shallow';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from "../../components/CustomHook/LanguageContext.jsx";
+import AppLayout from "../../layouts";
 
 const ShopPage = () => {
     const navigate = useNavigate();
@@ -107,6 +108,7 @@ const ShopPage = () => {
     }, [selectedCountry, selectedCategory, currentPage, resetProducts, loadProducts]);
 
     return (
+        <AppLayout>
         <Wrapper>
             <h1>{__i("Online Shopping with Crypto")}</h1>
             <div className="container">
@@ -203,6 +205,7 @@ const ShopPage = () => {
                 </div>
             </div>
         </Wrapper>
+        </AppLayout>
     );
 };
 
@@ -260,6 +263,9 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 20px;
+  }
+  .myPagination .ant-select-show-search:where(.css-dev-only-do-not-override-1x0dypw).ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    display: none;
   }
 
   .myPagination .ant-pagination-item {
