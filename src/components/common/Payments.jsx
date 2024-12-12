@@ -1,20 +1,22 @@
 import React from 'react';
 import styled from "styled-components";
 import {useLanguage} from "../CustomHook/LanguageContext.jsx";
+import Button from "./Button.jsx";
 
 const Payments = () => {
-    const {__i} =useLanguage();
-    return (
-        <Wrapper>
-            <div className="title">
-                <h2>{__i('Pay for gift cards the way you want')}
-                </h2>
-                <p>{__i('Choose from 200+ Cryptos, Binance Pay, Crypto.com Pay, Remitano, Visa/Mastercard and')} <a style={{cursor:'pointer',color:'black',textDecoration:"underline"}}
-                    href="#">{__i('more')}</a></p>
-            </div>
+    const {__i} = useLanguage();
+    return (<Wrapper>
 
-            <div className='paymentWraper'>
-                <div className='paymentCrypto'>
+        <div className="title">
+            <h2>{__i('Pay for gift cards the way you want')}
+            </h2>
+            <p>{__i('Choose from 200+ Cryptos, Binance Pay, Crypto.com Pay, Remitano, Visa/Mastercard and')} <a
+                style={{cursor: 'pointer', color: 'black', textDecoration: "underline"}}
+                href="#">{__i('more')}</a></p>
+        </div>
+
+        <div className='paymentWraper'>
+            <div className='paymentCrypto'>
                 <div className='pymentMetodItem'>
                     <div className='payMetnImgWrapper'>
                         <a href="">
@@ -70,7 +72,7 @@ const Payments = () => {
                     </div>
                 </div>
 
-                <div className='pymentMetodItem'>
+                <div className='pymentMetodItem XRP'>
                     <div className='payMetnImgWrapper'>
                         <a href="">
                             <img src="https://cdn.coinsbee.com/version2/dist/assets/img/coins/xrp.svg" alt="XRP"
@@ -79,7 +81,7 @@ const Payments = () => {
                     </div>
                 </div>
 
-                <div className='pymentMetodItem'>
+                <div className='pymentMetodItem another'>
                     <div className='payMetnImgWrapper'>
                         <a href="">
                             <img src="https://cdn.coinsbee.com/dist/assets/img/payment-icons/payment-icon-8.svg"
@@ -87,23 +89,33 @@ const Payments = () => {
                         </a>
                     </div>
                 </div>
-                </div>
-                <div className='paymetnsMetodName'>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/gatepay.svg" alt="GatePay" width='118px' height='30px'/></div>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/cryptocompay.svg" alt="Crypto.Com" width='175px' height="30px" /></div>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/binancepay.svg" alt="BinancePay" width='150px' height='30px'/></div>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/remianto.svg" alt="Remianto" width='130px' height='30px'/></div>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/visa.svg" alt="Visa" width="90px" height='30px'/></div>
-                    <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/mastercard.svg" alt="MasterCard" width='61px' height='36px'/></div>
+            </div>
+            <Button className='anyCrypto'>
+                {__i('Browse All')}
+            </Button>
+            <div className='paymetnsMetodName'>
+                <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/gatepay.svg" alt="GatePay"
+                          width='118px' height='30px'/></div>
+                <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/cryptocompay.svg"
+                          alt="Crypto.Com" width='175px' height="30px"/></div>
+                <div><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/binancepay.svg"
+                          alt="BinancePay" width='150px' height='30px'/></div>
+                <div className='remitano'><img
+                    src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/remianto.svg" alt="Remianto"
+                    width='130px' height='30px'/></div>
+                <div className='visa'><img src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/visa.svg"
+                                           alt="Visa" width="90px" height='30px'/></div>
+                <div className='master'><img
+                    src="https://cdn.coinsbee.com/dist/assets/img/payment-methods/mastercard.svg" alt="MasterCard"
+                    width='61px' height='36px'/></div>
 
-
-                </div>
 
             </div>
 
+        </div>
 
-        </Wrapper>
-    );
+
+    </Wrapper>);
 };
 
 const Wrapper = styled.div`
@@ -112,16 +124,18 @@ const Wrapper = styled.div`
   border-top: 1px solid #e0e0e0;
   width: 100%;
   flex-direction: column;
-  max-width: 1440px;
-  .paymetnsMetodName{
+  max-width: 1540px;
+
+  .paymetnsMetodName {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px 10px;
     width: 100%;
-    border-top:1px solid #e0e0e0 ;
-    border-bottom:1px solid #e0e0e0 ;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
   }
+
   .title {
     justify-content: center;
     align-items: center;
@@ -137,14 +151,16 @@ const Wrapper = styled.div`
     flex-direction: column;
     padding: 20px;
   }
-.paymentCrypto{
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 16px 10px;
-}
+
+  .paymentCrypto {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 16px 10px;
+  }
+
   .pymentMetodItem {
     border: 1px solid black;
     border-radius: 10px;
@@ -166,8 +182,76 @@ const Wrapper = styled.div`
       flex: 0 0 auto;
     }
   }
-  .paymetnsMetodName{
-    
+
+  .anyCrypto {
+    display: none;
+  }
+
+  @media (max-width: 926px) {
+    .paymentCrypto {
+
+
+    }
+
+    .remitano {
+      display: none;
+    }
+
+    .visa {
+      display: none;
+    }
+
+    .master {
+      display: none;
+    }
+
+    .anyCrypto {
+      font-size: 21px;
+      background-color: #fbcc0d;
+      border: none;
+      color: black;
+      width: 250px;
+      padding: 10px 24px 8px;
+      height: auto;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 35px;
+      transition: scale 0.3s, background-color 0.3s;
+
+      &:hover {
+        scale: 110%;
+        background-color: #fbcc0d;
+        box-shadow: 0 0 2px rgba(251, 204, 13, 60%), 0 0 20px rgba(251, 204, 13, 60%);
+      }
+    }
+
+    .pymentMetodItem {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      display: none;
+    }
+
+    .payMetnImgWrapper {
+      display: none;
+    }
+
+    .another {
+      display: none;
+    }
+
+    .XRP {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .paymetnsMetodName {
+        display: none;
+      }
+    }
   }
 `
 

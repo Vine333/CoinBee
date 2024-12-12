@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Modal = ({ active, setActive,children }) => {
-    return (
-        <ModalWrap active={active} onClick={() => setActive(false)}>
-            <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-                {children}
-            </div>
-        </ModalWrap>
-    );
+const Modal = ({active, setActive, children}) => {
+    return (<ModalWrap active={active} onClick={() => setActive(false)}>
+        <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+            {children}
+        </div>
+    </ModalWrap>);
 };
 
 const ModalWrap = styled.div`
-  display: ${({ active }) => (active ? 'flex' : 'none')};
+  display: ${({active}) => (active ? 'flex' : 'none')};
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
@@ -22,7 +20,7 @@ const ModalWrap = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition:0.5s all;
+  transition: 0.5s all;
 
   .modalContent {
     padding: 20px;

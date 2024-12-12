@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = ({children,...props}) => {
-    return (
-        <>
-            <Btn {...props}>
-                {children}
-            </Btn>
-        </>
-    );
+const Button = ({children, ...props}) => {
+    return (<>
+        <Btn {...props}>
+            {children}
+        </Btn>
+    </>);
 };
 
-const Btn= styled.button`
+const Btn = styled.button`
   color: black;
   background-color: #fbcc0d;
 

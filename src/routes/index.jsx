@@ -5,19 +5,15 @@ import ShopPage from "../pages/main/ShopPage.jsx";
 import AuthPage from "../pages/main/AuthPage.jsx";
 
 
-
 const AppRoutes = () => {
 
-    return (
-        <BrowserRouter basename={'/'}>
-            <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path='/shop' element={<ShopPage/>}/>
-                <Route path='/login' element={<AuthPage/>}/>
-            </Routes>
-        </BrowserRouter>
-    );
+    return (<BrowserRouter basename={'/'}>
+        <Routes>
+            <Route path="/" element={<MainPage/>}/>
+            <Route path='/shop' element={<ShopPage/>}/>
+            <Route path='/login' element={<AuthPage/>}/>
+        </Routes>
+    </BrowserRouter>);
 };
-
 export default AppRoutes;
 

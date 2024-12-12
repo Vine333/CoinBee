@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import {ICPayment,ICGame ,ICSoft,ICEnviro,ICCrypto,ICShop,ICFood  } from '/src/assets/SVG/Icons/index.js'
+import {ICPayment, ICGame, ICSoft, ICEnviro, ICCrypto, ICShop, ICFood} from '/src/assets/SVG/Icons/index.js'
 import {useNavigate} from "react-router-dom";
 import {GlobalStore} from "../../store/index.js";
 import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 
 const YellowComponent = () => {
     const navigate = useNavigate();
-    const {__i} =useLanguage();
+    const {__i} = useLanguage();
 
     const {
         setSelectedCategory,
@@ -19,93 +19,94 @@ const YellowComponent = () => {
 
     }
 
-    return (
-        <Wrapper>
-            <div className="container">
+    return (<Wrapper>
+            <div className="containerYellow">
 
-                <img src="https://cdn.coinsbee.com/dist/assets/img/categories/right-honeysheet.svg" alt="" style={{width:'auto',right:'0',bottom:"0",top:'0',position:"absolute",height:'100%',display:'flex'}}/>
-                <img src="https://cdn.coinsbee.com/dist/assets/img/categories/left-honeysheet.svg" alt="" style={{width:'auto',left:'0',bottom:"0",top:'0',position:"absolute",height:'100%',display:'flex'}}/>
-            <div className='middle'>
-                <div className='title'>
-                    <h2 style={{fontSize:'30px'}}>{__i("Explore more")}</h2>
-                    <p style={{fontSize:'20px'}}>{__i("From grabbing your coffee")}</p>
-                </div>
-                <div className='card'>
-                    <div className='line1'>
-                        <div className='itemCard Item1'>
-                            <a onClick={()=>onNavigateToShop(1)}>
-                            <div>
-                                <ICPayment/>
-                                <p>{__i( "Payment Cards")}</p>
+                <img src="https://cdn.coinsbee.com/dist/assets/img/categories/right-honeysheet.svg" alt=""
+                     style={{width: 'auto', right: '0', bottom: "0", top: '0', position: "absolute", height: '100%',}}
+                     className='bgImg'/>
+                <img src="https://cdn.coinsbee.com/dist/assets/img/categories/left-honeysheet.svg" alt=""
+                     style={{width: 'auto', left: '0', bottom: "0", top: '0', position: "absolute", height: '100%',}}
+                     className='bgImg'/>
+                <div className='middle'>
+                    <div className='title'>
+                        <h2 style={{fontSize: '30px'}}>{__i("Explore more")}</h2>
+                        <p style={{fontSize: '20px'}}>{__i("From grabbing your coffee")}</p>
+                    </div>
+                    <div className='card'>
+                        <div className='line1'>
+                            <div className='itemCard Item1'>
+                                <a onClick={() => onNavigateToShop(1)}>
+                                    <div>
+                                        <ICPayment/>
+                                        <p>{__i("Payment Cards")}</p>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        </div>
-                        <div className='itemCard Item2'>
-                            <a onClick={()=>onNavigateToShop(2)}>
-                                <div>
+                            <div className='itemCard Item2'>
+                                <a onClick={() => onNavigateToShop(2)}>
+                                    <div>
 
-                            <ICSoft/>
-                            <p> {__i( "Software")}</p>
-                              </div>
-                            </a>
+                                        <ICSoft/>
+                                        <p> {__i("Software")}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className='itemCard Item3'>
+                                <a onClick={() => onNavigateToShop(3)}>
+                                    <div>
+                                        <ICGame/>
+                                        <p> {__i("Games")}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className='itemCard Item4'>
+                                <a onClick={() => onNavigateToShop(4)}>
+                                    <div>
+                                        <ICFood/>
+                                        <p> {__i("Food and Entertainment")}</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        <div className='itemCard Item3'>
-                            <a onClick={()=>onNavigateToShop(3)}>
-                            <div>
-                                <ICGame/>
-                                <p> {__i( "Games")}</p>
-                            </div></a>
-                        </div>
-                        <div className='itemCard Item4'>
-                            <a onClick={()=>onNavigateToShop(4)}>
-                            <div>
-                                <ICFood/>
-                                <p> {__i( "Food and Entertainment")}</p>
-                            </div></a>
+                        <div className='line2'>
+                            <div className='itemCard Item5'>
+                                <a onClick={() => onNavigateToShop(5)}>
+                                    <div>
+                                        <ICShop/>
+                                        <p>   {__i("Shopping")}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div className='itemCard Item6'>
+                                <a onClick={() => onNavigateToShop(6)}>
+                                    <div>
+                                        <ICCrypto/>
+                                        <p>{__i("Cryptocurrency")}</p>
+                                    </div>
+
+                                </a>
+                            </div>
+                            <div className='itemCard Item7'>
+                                <a onClick={() => onNavigateToShop(7)}>
+                                    <div>
+                                        <ICEnviro/>
+                                        <p>{__i("Ecology")}</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div className='line2'>
-                        <div className='itemCard Item5'>
-                            <a onClick={()=>onNavigateToShop(5)}>
-                            <div>
-                                <ICShop/>
-                                <p>   {__i( "Shopping")}</p>
-                            </div>
-                        </a>
-                        </div>
-                        <div className='itemCard Item6'>
-                            <a onClick={()=>onNavigateToShop(6)}>
-                            <div>
-                                <ICCrypto/>
-                                <p>{__i( "Cryptocurrency")}</p>
-                            </div>
-
-                        </a>
-                        </div>
-                        <div className='itemCard Item7'>
-                            <a onClick={()=>onNavigateToShop(7)}>
-                            <div>
-                                <ICEnviro/>
-                                <p>{__i( "Ecology")}</p>
-                            </div></a>
-                            </div>
+                    <div className='tn'>
+                        <button className='btn' onClick={() => onNavigateToShop()}>
+                            {__i('Browse All')}
+                        </button>
                     </div>
                 </div>
-                <div className='tn'>
-                    <button  className='btn' onClick={()=>onNavigateToShop()}>
-                        {__i('Browse All')}
-                </button>
-                </div>
+
+
             </div>
-
-
-
-
-
-
-        </div>
-        </Wrapper>
-    );
+        </Wrapper>);
 };
 const Wrapper = styled.div`
   width: 100%;
@@ -113,12 +114,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 
-
-  .container {
-    max-width: 1440px;
-    width: 75%;
+  .containerYellow {
+    max-width: 1540px;
+    position: relative;
     display: flex;
 
   }
@@ -146,6 +145,7 @@ const Wrapper = styled.div`
     border-radius: 16px;
     text-align: center;
     flex-direction: column;
+
     &:hover {
       scale: 110%;
       background-color: #333e4d;
@@ -153,6 +153,7 @@ const Wrapper = styled.div`
 
 
     }
+
     transition: scale 0.3s, background-color 0.3s;
   }
 
@@ -160,7 +161,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    a{
+
+    a {
       color: white;
     }
   }
@@ -183,7 +185,8 @@ const Wrapper = styled.div`
   .btn {
     color: white;
     background-color: #333e4d;
-  margin: 48px 0 ;
+    margin: 48px 0;
+
     &:hover {
       scale: 110%;
       background-color: #333e4d;
@@ -191,6 +194,7 @@ const Wrapper = styled.div`
 
 
     }
+
     font-size: 21px;
     border: none;
     width: 250px;
@@ -203,6 +207,37 @@ const Wrapper = styled.div`
     border-radius: 35px;
     transition: scale 0.3s, background-color 0.3s;
 
+  }
+
+  @media (max-width: 716px) {
+    .line1 {
+      flex-direction: column;
+    }
+
+    .line2 {
+      flex-direction: column;
+    }
+
+    .containerYellow {
+      flex-direction: row;
+
+
+    }
+
+    .bgImg {
+      display: none;
+    }
+
+    .itemCard {
+      width: 100%;
+      max-width: 100%;
+
+    }
+
+    .middle {
+      align-items: initial;
+      padding: 20px;
+    }
   }
 `
 export default YellowComponent;

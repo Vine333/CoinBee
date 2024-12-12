@@ -8,7 +8,7 @@ import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 const NavMenu = () => {
 
     const navigate = useNavigate();
-    const {__i} =useLanguage();
+    const {__i} = useLanguage();
 
     const {
         setSelectedCategory,
@@ -21,69 +21,67 @@ const NavMenu = () => {
 
     }
 
-    const onNavigate = ()=>{
+    const onNavigate = () => {
         navigate('/shop')
     }
 
-        return (
-        <Menu>
+    return (<Menu>
 
-            <div className='burgerMenu'>
-                <BurgerMenu/>
-            </div>
-            <ul className='navLinks'>
-                <li className='listItemAllProducts'>
-                    <a className='linksCategory' onClick={onNavigate }>
+        <div className='burgerMenu'>
+            <BurgerMenu/>
+        </div>
+        <ul className='navLinks'>
+            <li className='listItemAllProducts'>
+                <a className='linksCategory' onClick={onNavigate}>
 
-                        {__i("All Products")}
-                    </a>
-                </li>
-                <li className='listItemMobil'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(1)}>
+                    {__i("All Products")}
+                </a>
+            </li>
+            <li className='listItemMobil'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(1)}>
 
-                        {__i( "Payment Cards")}
-                    </a>
-                </li>
-                <li className='listItemGame'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(2)}>
+                    {__i("Payment Cards")}
+                </a>
+            </li>
+            <li className='listItemGame'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(2)}>
 
-                        {__i( "Software")}
-                    </a>
-                </li>
-                <li className='listItemPlayGame'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(3)}>
+                    {__i("Software")}
+                </a>
+            </li>
+            <li className='listItemPlayGame'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(3)}>
 
-                        {__i( "Games")}
-                    </a>
-                </li>
-                <li className='listItemCart'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(4)}>
+                    {__i("Games")}
+                </a>
+            </li>
+            <li className='listItemCart'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(4)}>
 
-                        {__i( "Food and Entertainment")}
-                    </a>
-                </li>
-                <li className='listItemCrypto'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(5)}>
-                        {__i( "Shopping")}
-                    </a>
-                </li>
-                <li className='listItemCrypto'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(6)}>
+                    {__i("Food and Entertainment")}
+                </a>
+            </li>
+            <li className='listItemCrypto'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(5)}>
+                    {__i("Shopping")}
+                </a>
+            </li>
+            <li className='listItemCrypto'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(6)}>
 
-                        {__i( "Cryptocurrency")}
-                    </a>
-                </li>
-                <li className='listItemCrypto'>
-                    <a className='linksCategory' onClick={()=>onNavigateToShop(7)}>
+                    {__i("Cryptocurrency")}
+                </a>
+            </li>
+            <li className='listItemCrypto'>
+                <a className='linksCategory' onClick={() => onNavigateToShop(7)}>
 
-                        {__i( "Ecology")}
-                    </a>
-                </li>
+                    {__i("Ecology")}
+                </a>
+            </li>
 
-            </ul>
+        </ul>
 
-        </Menu>
-    );
+    </Menu>);
 };
 const Menu = styled.div`
   background-color: #fbcc0d;

@@ -9,8 +9,7 @@ const {Content} = Layout;
 const AppLayout = ({children}) => {
 
 
-    return (
-        <Wrapper
+    return (<Wrapper
             className="site-layout">
 
             <Header/>
@@ -19,8 +18,7 @@ const AppLayout = ({children}) => {
                 {children}
             </Content>
 
-        </Wrapper>
-    );
+        </Wrapper>);
 };
 
 const Wrapper = styled(Layout)`

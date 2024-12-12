@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 
-const GlobalStore=(set)=>({
+const UseGlobalStore=(set)=>({
     currentPage:1,
     selectedCountry: [],
     selectedCategory: [],
@@ -10,4 +10,4 @@ const GlobalStore=(set)=>({
     setCurrentPage: (page) => set({ currentPage: page }),
     setIsModalOpen: (isOpen) => set({ isModalOpen: isOpen }),
 });
-export default create(GlobalStore)
+export default create(UseGlobalStore)

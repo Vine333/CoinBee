@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {StarIC, StarHalfIC} from '/src/assets/SVG/Icons/index.js';
 import AppLayout from "../../layouts/index.jsx";
 import {Data} from "../../config/data.js";
-import items from '/src/config/Accardion.js';
+import Items from '/src/config/Accardion.js';
 import {
     Carousel, Payments, GiftCardForCommerce, YellowComponent, SectionVideo, SectionSteps, Review, FAQ, Footer
 } from "/src/components/common/index.js";
@@ -14,7 +14,7 @@ import {useLanguage} from "../../components/CustomHook/LanguageContext.jsx";
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const { __i} = useLanguage();
+    const {__i} = useLanguage();
     const sectionRef = useRef(null);
 
     const scrollToSection = () => {
@@ -27,62 +27,66 @@ const MainPage = () => {
         navigate('/shop');
     };
     const localizedData = Data(__i);
+    const localizedItems = Items(__i);
+    console.log(localizedItems)
+    console.log(localizedData)
     //  todo классы с маленькой camelCase
 
     return (<AppLayout>
         <Wrapper>
-            <div className='container'>
-                <div className='flexContainer'>
-                    <div className='descriptionMainContent'>
-                        <h1>{__i("Buy Gift Cards with Crypto")}</h1>
-                        <p>{__i('At Coinsbee.com you can buy payment cards, mobile top-ups or gift cards with Bitcoin or other cryptocurrencies. More than 4000 brands available in over 185 countries. Easy, fast and secure payment with over 200 different cryptocurrencies, Mastercard, Visa and other payment methods')}</p>
-                        <a role='button' className='btnAMineContent'
-                           onClick={onNavigateShop}>{__i('Browse All')}</a>
+            <div className='containerForAll'>
+                <div className='containerMain'>
+                    <div className='flexContainer'>
+                        <div className='descriptionMainContent'>
+                            <h1>{__i("Buy Gift Cards with Crypto")}</h1>
+                            <p>{__i('At Coinsbee.com you can buy payment cards, mobile top-ups or gift cards with Bitcoin or other cryptocurrencies. More than 4000 brands available in over 185 countries. Easy, fast and secure payment with over 200 different cryptocurrencies, Mastercard, Visa and other payment methods')}</p>
+                            <a role='button' className='btnAMineContent'
+                               onClick={onNavigateShop}>{__i('Browse All')}</a>
+                        </div>
+                        <div className='carousel'>
+                            <Carousel cards={Cards}/>
+                        </div>
                     </div>
-                    <div className='carousel'>
-                        <Carousel cards={Cards}/>
+                    <div className='logoBTC'>
+                        <a href="" className='linkBTC'>
+                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/beincrypto.svg' alt=""/>
+                        </a>
+                        <a href="" className='linkBTC'>
+                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-com.svg' alt=""/>
+                        </a>
+                        <a href="" className='linkBTC'>
+                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-magazine.svg' width='170px'
+                                 height='25px' alt=""/>
+                        </a>
+                        <a href="" className='linkBTC'>
+                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitecho.svg' alt=""/>
+                        </a>
+                        <a href="" className='linkBTC'>
+                            <img src='https://cdn.coinsbee.com/dist/assets/img/hero/newsbtc.svg' alt=""/>
+                        </a>
                     </div>
-                </div>
-                <div className='logoBTC'>
-                    <a href="" className='linkBTC'>
-                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/beincrypto.svg' alt=""/>
-                    </a>
-                    <a href="" className='linkBTC'>
-                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-com.svg' alt=""/>
-                    </a>
-                    <a href="" className='linkBTC'>
-                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitcoin-magazine.svg' width='170px'
-                             height='25px' alt=""/>
-                    </a>
-                    <a href="" className='linkBTC'>
-                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/bitecho.svg' alt=""/>
-                    </a>
-                    <a href="" className='linkBTC'>
-                        <img src='https://cdn.coinsbee.com/dist/assets/img/hero/newsbtc.svg' alt=""/>
-                    </a>
-                </div>
-                <div className='rate'>
-                    <div className='numberWithStar'>
-                        <span className='number'>4.2/5</span>
-                        <ul>
-                            <li className='liStar'>
-                                <StarIC/>
-                            </li>
-                            <li className='liStar'>
-                                <StarIC/>
-                            </li>
-                            <li className='liStar'>
-                                <StarIC/>
-                            </li>
-                            <li className='liStar'>
-                                <StarIC/>
-                            </li>
-                            <li className='liStar'>
-                                <StarHalfIC/>
-                            </li>
-                        </ul>
-                    </div>
-                    <span>
+                    <div className='rate'>
+                        <div className='numberWithStar'>
+                            <span className='number'>4.2/5</span>
+                            <ul>
+                                <li className='liStar'>
+                                    <StarIC/>
+                                </li>
+                                <li className='liStar'>
+                                    <StarIC/>
+                                </li>
+                                <li className='liStar'>
+                                    <StarIC/>
+                                </li>
+                                <li className='liStar'>
+                                    <StarIC/>
+                                </li>
+                                <li className='liStar'>
+                                    <StarHalfIC/>
+                                </li>
+                            </ul>
+                        </div>
+                        <span>
                             <div>
                                 <a role='button' className='trust'
                                    onClick={scrollToSection}> {__i('Trusted by 500,000+ users')}</a>
@@ -91,16 +95,17 @@ const MainPage = () => {
                                     style={{margin: "0 8px", color: 'gray'}}>{__i('from 185+ countries')}</span>
                             </div>
                         </span>
+                    </div>
                 </div>
+                <Payments className='payGiftCard'/>
+                {localizedData.map((item, index) => (<GiftCardForCommerce key={index} item={item} language={__i}/>))}
+                <YellowComponent/>
+                <SectionVideo/>
+                <SectionSteps/>
+                <Review ref={sectionRef}/>
+                <h2 style={{fontSize: '30px'}}>FAQ</h2>
+                <FAQ items={localizedItems} language={__i}/>
             </div>
-            <Payments className='payGiftCard'/>
-            {localizedData.map((item, index) => (<GiftCardForCommerce key={index} item={item}/>))}
-            <YellowComponent/>
-            <SectionVideo/>
-            <SectionSteps/>
-            <Review ref={sectionRef}/>
-            <h2 style={{fontSize: '30px'}}>FAQ</h2>
-            <FAQ items={items} language={__i}/>
             <Footer/>
         </Wrapper>
     </AppLayout>);
@@ -137,11 +142,6 @@ const Wrapper = styled.div`
     list-style: none;
   }
 
-  @media (min-width: 768px) {
-    .br {
-      display: none !important;
-    }
-  }
 
   .btnAMineContent {
     font-size: 21px;
@@ -227,6 +227,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 1540px;
 
     ul {
       display: flex;
@@ -246,16 +247,57 @@ const Wrapper = styled.div`
     justify-content: center;
   }
 
-  .container {
+  .containerMain {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 3rem;
+    max-width: 1540px;
   }
 
   .number {
     color: gray;
+  }
+
+  .containerForAll {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .br {
+      display: none !important;
+    }
+  }
+  @media (max-width: 1400px) {
+    .flexContainer {
+      flex-direction: column;
+    }
+
+    .carousel {
+
+    }
+
+    .descriptionMainContent {
+      order: 1;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  @media (max-width: 1124px) {
+    .carousel {
+      display: none;
+
+    }
+
+    .logoBTC {
+      display: none;
+    }
   }
 `;
 

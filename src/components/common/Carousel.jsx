@@ -1,49 +1,38 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
-const Carousel = ({ cards }) => {
+const Carousel = ({cards}) => {
     const [currentIndex, setCurrentIndex] = useState(1);
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === cards.length - 1 ? 0 : prevIndex + 1
-        );
+        setCurrentIndex((prevIndex) => prevIndex === cards.length - 1 ? 0 : prevIndex + 1);
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? cards.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => prevIndex === 0 ? cards.length - 1 : prevIndex - 1);
     };
 
-    return (
-        <CarouselWrapper>
-            <Button className="prev" onClick={handlePrev}>
-                ‹
-            </Button>
-            <CardsContainer>
-                {cards.map((card, index) => {
-                    let positionClass = "";
+    return (<CarouselWrapper>
+        <Button className="prev" onClick={handlePrev}>
+            ‹
+        </Button>
+        <CardsContainer>
+            {cards.map((card, index) => {
+                let positionClass = "";
 
 
-                    if (index === currentIndex) positionClass = "center";
-                    else if (index === currentIndex - 1 || (currentIndex === 0 && index === cards.length - 1)) positionClass = "prev";
-                    else if (index === currentIndex + 1 || (currentIndex === cards.length - 1 && index === 0)) positionClass = "next";
-                    else positionClass = "hidden";
+                if (index === currentIndex) positionClass = "center"; else if (index === currentIndex - 1 || (currentIndex === 0 && index === cards.length - 1)) positionClass = "prev"; else if (index === currentIndex + 1 || (currentIndex === cards.length - 1 && index === 0)) positionClass = "next"; else positionClass = "hidden";
 
-                    return (
-                        <CardWrapper className={positionClass} key={card.title}>
-                            <Card {...card} />
-                        </CardWrapper>
-                    );
-                })}
-            </CardsContainer>
-            <Button className="next" onClick={handleNext}>
-                ›
-            </Button>
-        </CarouselWrapper>
-    );
+                return (<CardWrapper className={positionClass} key={card.title}>
+                    <Card {...card} />
+                </CardWrapper>);
+            })}
+        </CardsContainer>
+        <Button className="next" onClick={handleNext}>
+            ›
+        </Button>
+    </CarouselWrapper>);
 };
 
 const CarouselWrapper = styled.div`
@@ -51,8 +40,9 @@ const CarouselWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1050px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 5px;
   overflow: hidden;
   height: 450px;
 `;
@@ -109,7 +99,7 @@ const Button = styled.button`
   z-index: 8;
 
   &:hover {
-    scale: 110%;
+    scale: 103%;
     background-color: #fbcc0d;
     box-shadow: 0 0 2px rgba(251, 204, 13, 60%), 0 0 20px rgba(251, 204, 13, 60%);
   }

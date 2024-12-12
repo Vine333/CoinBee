@@ -4,78 +4,104 @@ import {StarHalfIC, StarIC} from "../../assets/SVG/Icons/index.js";
 import CarouselReview from "./CarouselReview.jsx";
 import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 
- const cards = [
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'Amelia',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'Adam',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'James',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'Janis',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'Serghei',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
-     { comment:'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro', name:'Travis Scott',twitterIcon:'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'},
+const cards = [{
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'Amelia',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+}, {
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'Adam',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+}, {
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'James',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+}, {
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'Janis',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+}, {
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'Serghei',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+}, {
+    comment: 'I still use #btc to buy, sell and shop at #Coinsbee, it\'s quite convenient bro',
+    name: 'Travis Scott',
+    twitterIcon: 'https://cdn.coinsbee.com/dist/assets/img/x-logo.svg'
+},
 
- ]
+]
 
 
-const Review = forwardRef((props,ref) => {
-    const {__i} =useLanguage();
-    return (
-        <Wrapper>
-            <div className='container' ref={ref}>
-                <div className="title">
-                    <h2 style={{fontSize:'32px',fontWeight:'normal'}}>{__i('What our customers say')}</h2>
-                    <div className='stars'>
-                        <StarIC color="#51af95"/>
-                        <StarIC color="#51af95"/>
-                        <StarIC color="#51af95"/>
-                        <StarIC color="#51af95"/>
+const Review = forwardRef((props, ref) => {
+    const {__i} = useLanguage();
+    return (<Wrapper>
+        <div className='container' ref={ref}>
+            <div className="title">
+                <h2 style={{fontSize: '32px', fontWeight: 'normal'}}>{__i('What our customers say')}</h2>
+                <div className='stars'>
+                    <StarIC color="#51af95"/>
+                    <StarIC color="#51af95"/>
+                    <StarIC color="#51af95"/>
+                    <StarIC color="#51af95"/>
 
-                        <StarHalfIC color='#51af95' />
+                    <StarHalfIC color='#51af95'/>
 
-                    </div>
-                    <a href="https://www.trustpilot.com/review/coinsbee.com" style={{cursor:'pointer'}}>4.2/5 on Trustpilot</a>
                 </div>
-                <CarouselReview cards={cards}/>
-                <div className='btn'>
-                    <a href="https://www.trustpilot.com/review/coinsbee.com" style={{color:'black'}}>
-
-                        {__i('Check Our Reviews')}
-
-                    </a>
-
-                </div>
+                <a href="https://www.trustpilot.com/review/coinsbee.com" style={{cursor: 'pointer'}}>4.2/5 on
+                    Trustpilot</a>
             </div>
-        </Wrapper>
-    );
+            <CarouselReview cards={cards}/>
+            <div className='btn'>
+                <a href="https://www.trustpilot.com/review/coinsbee.com" style={{color: 'black'}}>
+
+                    {__i('Check Our Reviews')}
+
+                </a>
+
+            </div>
+        </div>
+    </Wrapper>);
 });
 const Wrapper = styled.div`
-width: 100%;
+  width: 100%;
   border-bottom: 1px solid lightgrey;
-  .container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+    max-width: 1540px;
+
   }
-  .stars{
+
+  .stars {
     padding: 10px;
     scale: 2;
     margin-bottom: 5px;
   }
-.title{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  a{
-    color:black;
-    font-size: 19px;
-    text-decoration: underline;
-    
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    a {
+      color: black;
+      font-size: 19px;
+      text-decoration: underline;
+
+    }
   }
-}
-  .btn{
-   
-    margin: 48px 0 ;
+
+  .btn {
+
+    margin: 48px 0;
     color: black;
     background-color: #fbcc0d;
 
@@ -88,7 +114,6 @@ width: 100%;
     }
 
 
-  
     font-size: 21px;
     border: none;
     width: 300px;

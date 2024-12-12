@@ -9,17 +9,8 @@ import FAQ from "../../components/common/FAQ.jsx";
 import Footer from "../../components/common/Footer.jsx";
 
 
-
 export {
-    Carousel,
-    Payments,
-    GiftCardForCommerce,
-    YellowComponent,
-    SectionVideo,
-    SectionSteps,
-    Review,
-    FAQ,
-    Footer
+    Carousel, Payments, GiftCardForCommerce, YellowComponent, SectionVideo, SectionSteps, Review, FAQ, Footer
 
 }
 

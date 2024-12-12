@@ -3,6 +3,5 @@ import useEventListener from "./useEventListener.js";
 
 
 export {
-    useIsomorphicLayoutEffect,
-    useEventListener
+    useIsomorphicLayoutEffect, useEventListener
 }

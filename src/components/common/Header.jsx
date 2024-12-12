@@ -4,7 +4,7 @@ import {Global, Logo} from '/src/assets/SVG/Icons/index.js'
 import {Select, Space, Spin} from "antd";
 import {ShoppingCartOutlined, UserOutlined, SearchOutlined} from '@ant-design/icons'
 import Button from "./Button.jsx";
-import {GlobalStore,useCountryStore,} from "../../store/index.js";
+import {GlobalStore, useCountryStore,} from "../../store/index.js";
 import Modal from "./Modal.jsx";
 import {useShallow} from "zustand/react/shallow";
 import {useNavigate} from "react-router-dom";
@@ -12,12 +12,10 @@ import Menu from '/src/components/common/NavMenu.jsx'
 import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 
 
-
-
 const Header = () => {
 
     const navigate = useNavigate()
-    const {changeLanguage, __i } = useLanguage();
+    const {changeLanguage, __i} = useLanguage();
 
     const {
         selectedCountry, setSelectedCountry,
@@ -41,83 +39,80 @@ const Header = () => {
         console.log(`Selected country: ${value}`);
     };
 
-const NavigateToAuth = ()=>{
-    navigate('/login')
-}
+    const NavigateToAuth = () => {
+        navigate('/login')
+    }
 
-    const onNavigateHome= ()=>{
-        navigate('/',{
-            replace:true,
+    const onNavigateHome = () => {
+        navigate('/', {
+            replace: true,
         })
     }
 
 
-
-
     return (<>
 
-            <Wrapper>
-                <div className='logo' onClick={onNavigateHome}>
-                    <Logo/>
-                </div>
-                <div className='search'>
-                    <input placeholder={__i("What are you looking for?")} className='input'>
+        <Wrapper>
+            <div className='logo' onClick={onNavigateHome}>
+                <Logo/>
+            </div>
+            <div className='search'>
+                <input placeholder={__i("What are you looking for?")} className='input'>
 
-                    </input>
-                    <button className='btnInput'>
-                        <SearchOutlined/>
-                    </button>
-                </div>
-                <div className="btnInHeader">
-                    <Button className='btn Global' onClick={() => setModalActive(true)}>
-                        <Global/>
-                    </Button>
+                </input>
+                <button className='btnInput'>
+                    <SearchOutlined/>
+                </button>
+            </div>
+            <div className="btnInHeader">
+                <Button className='btn Global' onClick={() => setModalActive(true)}>
+                    <Global/>
+                </Button>
 
-                    <Button className='btn User' onClick={NavigateToAuth}>
-                        <UserOutlined/>
-                    </Button>
+                <Button className='btn User' onClick={NavigateToAuth}>
+                    <UserOutlined/>
+                </Button>
 
-                    <Button className='btn Shopping'>
+                <Button className='btn Shopping'>
 
-                        <ShoppingCartOutlined/>
-                    </Button>
+                    <ShoppingCartOutlined/>
+                </Button>
 
-                </div>
-            </Wrapper>
-            <Modal active={modalActive} setActive={setModalActive}>
-                <h2>{__i("Country and Language")}</h2>
-                <Select showSearch
-                        style={{width: '100%', marginBottom: '10px'}}
-                        placeholder={__i('Choices Country')}
-                        optionFilterProp="children"
-                        value={selectedCountry}
-                        onChange={handleCountryChange}
-                        loading={isLoading}
-                        filterOption={(input, option) => option.label.toLowerCase().includes(input.toLowerCase())}
-                        notFoundContent={isLoading ? <Spin size="small"/> : 'Нет данных'}>
+            </div>
+        </Wrapper>
+        <Modal active={modalActive} setActive={setModalActive}>
+            <h2>{__i("Country and Language")}</h2>
+            <Select showSearch
+                    style={{width: '100%', marginBottom: '10px'}}
+                    placeholder={__i('Choices Country')}
+                    optionFilterProp="children"
+                    value={selectedCountry}
+                    onChange={handleCountryChange}
+                    loading={isLoading}
+                    filterOption={(input, option) => option.label.toLowerCase().includes(input.toLowerCase())}
+                    notFoundContent={isLoading ? <Spin size="small"/> : 'Нет данных'}>
 
-                          {countries.map(country => (
+                {countries.map(country => (
 
-                        <Select.Option key={country.id} value={country.iso_name} label={country.name}>
-                            <Space>
-                                <img src={country.flag_url}
-                                     alt={country.name} style={{width: '20px', marginRight: '8px'}}/>
-                                {country.name}
-                                ({country.currency_code})
-                            </Space>
-                        </Select.Option>))}
-                </Select>
-                <Select
-                    defaultValue={localStorage.getItem('language')}
-                    onChange={changeLanguage}
-                    style={{width: '100%'}}
-                    options={[{value: 'ru', label: 'Русский'}, {value: 'en', label: 'English'},]}
-                />
-            </Modal>
+                    <Select.Option key={country.id} value={country.iso_name} label={country.name}>
+                        <Space>
+                            <img src={country.flag_url}
+                                 alt={country.name} style={{width: '20px', marginRight: '8px'}}/>
+                            {country.name}
+                            ({country.currency_code})
+                        </Space>
+                    </Select.Option>))}
+            </Select>
+            <Select
+                defaultValue={localStorage.getItem('language')}
+                onChange={changeLanguage}
+                style={{width: '100%'}}
+                options={[{value: 'ru', label: 'Русский'}, {value: 'en', label: 'English'},]}
+            />
+        </Modal>
         <Menu/>
-        </>);
+    </>);
 };
-
 
 
 const Wrapper = styled.div`
@@ -131,7 +126,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   box-sizing: border-box;
 
-  
+
   .logo {
     width: 25%;
     cursor: pointer;

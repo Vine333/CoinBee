@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 
-const FAQ = ({ items, __i}) => {
+const FAQ = ({items}) => {
 
     const [openId, setOpenId] = useState(null);
 
@@ -13,53 +13,48 @@ const FAQ = ({ items, __i}) => {
         setOpenId(id);
     }
 
-    return (
-        <Wrapper>
+    return (<Wrapper>
+        <div className='container'>
             <div className="column">
                 <ul className="accordion">
-                    {items.slice(0, 5).map((accordionItem, id) => (
-                        <li className="accordionItems" key={id}>
-                            <button
-                                className={`accordionHeader ${openId === id ? 'active' : ''}`}
-                                onClick={() => clickHandler(id)}
-                            >
-                                {accordionItem.title[__i]} {/* Используем перевод */}
-                                <span className={`accordionArrow ${openId === id ? 'active' : ''}`} >▲</span>
-                            </button>
-                            {openId === id && (
-                                <div className="accordionCollapse open">
-                                    <div className="accordionBody"
-                                         dangerouslySetInnerHTML={{ __html: accordionItem.description[__i] }} />
-                                </div>
-                            )}
-                        </li>
-                    ))}
+                    {items.slice(0, 5).map((accordionItem, id) => (<li className="accordionItems" key={id}>
+                        <button
+                            className={`accordionHeader ${openId === id ? 'active' : ''}`}
+                            onClick={() => clickHandler(id)}
+                        >
+                            {accordionItem.title}
+                            <span className={`accordionArrow ${openId === id ? 'active' : ''}`}>▲</span>
+                        </button>
+                        {openId === id && (<div className="accordionCollapse open">
+                            <div className="accordionBody"
+                                 dangerouslySetInnerHTML={{__html: accordionItem.description}}/>
+                        </div>)}
+                    </li>))}
                 </ul>
             </div>
 
             <div className="column">
                 <ul className="accordion">
-                    {items.slice(5, 9).map((accordionItem, id) => (
-                        <li className="accordionItems" key={id}>
-                            <button
-                                className={`accordionHeader ${openId === id + 5 ? 'active' : ''}`}
-                                onClick={() => clickHandler(id + 5)}
-                            >
-                                {accordionItem.title[__i]} {/* Используем перевод */}
-                                <span className={`accordionArrow ${openId === id + 5 ? 'active' : ''}`} >▲</span>
-                            </button>
-                            {openId === id + 5 && (
-                                <div className="accordionCollapse open">
-                                    <div className="accordionBody"
-                                         dangerouslySetInnerHTML={{ __html: accordionItem.description[__i] }} />
-                                </div>
-                            )}
-                        </li>
-                    ))}
+                    {items.slice(5, 9).map((accordionItem, id) => (<li className="accordionItems" key={id}>
+                        <button
+                            className={`accordionHeader ${openId === id + 5 ? 'active' : ''}`}
+                            onClick={() => clickHandler(id + 5)}
+                        >
+                            {accordionItem.title}
+                            <span className={`accordionArrow ${openId === id + 5 ? 'active' : ''}`}>▲</span>
+                        </button>
+                        {openId === id + 5 && (<div className="accordionCollapse open">
+                                <div className="accordionBody"
+                                     dangerouslySetInnerHTML={{__html: accordionItem.description}}/>
+
+                            </div>
+
+                        )}
+                    </li>))}
                 </ul>
             </div>
-        </Wrapper>
-    );
+        </div>
+    </Wrapper>);
 };
 
 const Wrapper = styled.div`
@@ -67,6 +62,13 @@ const Wrapper = styled.div`
   justify-content: space-between;
   gap: 15px;
   padding: 30px;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1540px;
+  }
+
   .column {
     width: 48%;
   }
@@ -97,11 +99,12 @@ const Wrapper = styled.div`
     transition: background-color 0.3s ease;
   }
 
+
   .accordionCollapse {
     transform: scaleY(0);
     transform-origin: top;
     overflow: hidden;
-    transition: transform 10ms ease-in-out, padding 0.8s ease;
+    transition: transform 0.3s ease-in-out, padding 0.8s ease;
     padding: 0;
   }
 
@@ -115,7 +118,9 @@ const Wrapper = styled.div`
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     font-size: 20px;
+    display: block;
     color: white;
+
     a {
       color: #eecc0d;
     }
@@ -140,12 +145,13 @@ const Wrapper = styled.div`
 
   .accordionArrow.active {
     transform: translateY(-50%) rotate(180deg);
-    color:#eecc0d ;
+    color: #eecc0d;
   }
 
   .accordionHeader.active {
     background-color: #333e4d;
     color: #eecc0d;
+    width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -153,6 +159,31 @@ const Wrapper = styled.div`
   .accordionBody.active-p {
     background-color: #333e4d;
     color: #fbc826;
+  }
+
+  @media (max-width: 570px ) {
+    padding: 0;
+    .container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      padding: 0;
+    }
+
+    .accordionHeader {
+      width: 100%;
+    }
+
+    .accordionArrow {
+      right: 10px;
+    }
+
+  }
+  @media (max-width: 480px) {
+    .accordionHeader {
+      font-size: 10px;
+    }
   }
 `;
 

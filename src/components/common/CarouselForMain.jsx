@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Card from "./Card";
 
@@ -7,67 +7,59 @@ const CarouselForMain = ({card}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === card.length - 1 ? 0 : prevIndex + 1
-        );
+        setCurrentIndex((prevIndex) => prevIndex === card.length - 1 ? 0 : prevIndex + 1);
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? card.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => prevIndex === 0 ? card.length - 1 : prevIndex - 1);
     };
 
-    const visibleCards = card.slice(currentIndex, currentIndex + 3).concat(
-        currentIndex + 3 > card.length
-            ? card.slice(0, (currentIndex + 3) % card.length)
-            : []
-    );
+    const visibleCards = card.slice(currentIndex, currentIndex + 3).concat(currentIndex + 3 > card.length ? card.slice(0, (currentIndex + 3) % card.length) : []);
 
-    return (
-        <CarouselWrapper>
-            <Button className="prev" onClick={handlePrev}>
-                ‹
-            </Button>
-            <CardsContainer>
-                {visibleCards.map((card) => (
-                    <CardWrapper key={card.id} >
-                        <Card {...card} />
-                    </CardWrapper>
-                ))}
-            </CardsContainer>
-            <Button className="next" onClick={handleNext}>
-                ›
-            </Button>
-        </CarouselWrapper>
-    );
+    return (<CarouselWrapper>
+        <Button className="prev" onClick={handlePrev}>
+            ‹
+        </Button>
+        <div className='cardsContainer'>
+            {visibleCards.map((card) => (<div className='cardWrapper' key={card.id}>
+                <Card {...card} />
+            </div>))}
+        </div>
+        <Button className="next" onClick={handleNext}>
+            ›
+        </Button>
+    </CarouselWrapper>);
 };
 
 const CarouselWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1070px;
+  max-width: 1540px;
   margin: 0 auto;
   overflow: hidden;
   padding-bottom: 50px;
-`;
+  padding-inline: 10px;
 
-const CardsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 20px; 
-`;
+  @media (max-width: 1052px) {
+    display: none;
+  }
 
-const CardWrapper = styled.div`
-  
-  transition: transform 0.3s ease, opacity 0.3s ease, z-index 0.3s ease;
-  opacity: 1;
-  transform: scale(1);
-`;
+  .cardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
 
+
+  .cardWrapper {
+    transition: transform 0.3s ease, opacity 0.3s ease, z-index 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+  }
+`
 const Button = styled.button`
   flex: 0 0 auto;
   color: black;
@@ -90,6 +82,7 @@ const Button = styled.button`
     padding: 5px 10px;
     font-size: 1rem;
   }
+
 `;
 
 export default CarouselForMain;

@@ -6,7 +6,7 @@ import {useLanguage} from "../CustomHook/LanguageContext.jsx";
 
 const Footer = () => {
 
-    const {__i} =useLanguage();
+    const {__i} = useLanguage();
 
     return (<Wrapper>
         <div className='container'>
@@ -15,26 +15,26 @@ const Footer = () => {
                     <p>{__i('Categories')}</p>
                     <div className='categoryList'>
                         <ul className='list'>
-                            <li><a href="">{__i( "Payment Cards")}</a></li>
-                            <li><a href=""> {__i( "Software")}</a></li>
-                            <li><a href="">  {__i( "Games")}</a></li>
-                            <li><a href=""> {__i( "Food and Entertainment")}</a></li>
-                            <li><a href="">{__i( "Shopping")}</a></li>
-                            <li><a href="">{__i( "Cryptocurrency")}</a></li>
-                            <li><a href="">{__i( "Ecology")}</a></li>
+                            <li><a href="">{__i("Payment Cards")}</a></li>
+                            <li><a href=""> {__i("Software")}</a></li>
+                            <li><a href="">  {__i("Games")}</a></li>
+                            <li><a href=""> {__i("Food and Entertainment")}</a></li>
+                            <li><a href="">{__i("Shopping")}</a></li>
+                            <li><a href="">{__i("Cryptocurrency")}</a></li>
+                            <li><a href="">{__i("Ecology")}</a></li>
 
                         </ul>
                     </div>
                 </div>
                 <div className='footerInfoTools'>
-                    <p>{__i( "Tools")}</p>
+                    <p>{__i("Tools")}</p>
                     <div className='toolsList'>
                         <ul className='list'>
-                            <li><a>{__i( 'Support & Help')}</a></li>
-                            <li><a>{__i( 'Supported Crypto')}</a></li>
+                            <li><a>{__i('Support & Help')}</a></li>
+                            <li><a>{__i('Supported Crypto')}</a></li>
                             <li><a>{__i("How it Works")}</a></li>
-                            <li><a>{__i( 'Newsletter')}</a></li>
-                            <li><a>{__i( 'Event Calendar')}</a></li>
+                            <li><a>{__i('Newsletter')}</a></li>
+                            <li><a>{__i('Event Calendar')}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -111,6 +111,7 @@ const Footer = () => {
 const Wrapper = styled.div`
   width: 100%;
   background-color: #333e4d;
+  margin-top: 20px;
 
   .container {
     display: flex;
@@ -118,11 +119,13 @@ const Wrapper = styled.div`
     padding: 10px 24px 0;
 
   }
-.footerLanguage{
-  background-color: #eecc0d;
-  width: 100%;
-  height: 40px;
-}
+
+  .footerLanguage {
+    background-color: #eecc0d;
+    width: 100%;
+    height: 40px;
+  }
+
   .footerInfo {
     display: flex;
     justify-content: space-between;
@@ -135,10 +138,12 @@ const Wrapper = styled.div`
     color: #eecc0d;
     font-size: 20px;
   }
-.descriptionFooter{
-  color: white;
-  font-size: 16px;
-}
+
+  .descriptionFooter {
+    color: white;
+    font-size: 16px;
+  }
+
   .footerInfoCategory {
     color: white;
     position: relative;
@@ -174,6 +179,7 @@ const Wrapper = styled.div`
   .community {
     display: flex;
     padding-inline: 30px;
+
     img {
       margin: 8px;
     }
@@ -272,6 +278,22 @@ const Wrapper = styled.div`
 
     scale: 1.5;
 
+  }
+
+  @media (max-width: 1400px) {
+    .footerLogo {
+      display: none;
+    }
+  }
+  @media (max-width: 750px) {
+    .footerInfo {
+      flex-direction: column;
+    }
+
+    .footerCommunity {
+      flex-direction: column;
+      padding: 0;
+    }
   }
 `
 export default Footer;

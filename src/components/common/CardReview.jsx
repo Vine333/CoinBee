@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import {Avatar} from "../../assets/SVG/Icons/index.js";
 
-const CardReview = ({ comment, name, twitterIcon,}) => {
+const CardReview = ({comment, name, twitterIcon,}) => {
     return (<CardWrap>
         <div className="cardTitle">
             <div className='imgNick'>
@@ -33,24 +33,29 @@ const CardWrap = styled.div`
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: white;
   padding: 16px;
+  margin: 15px;
 
-  .imgNick{
-    
+  .imgNick {
+
     display: flex;
   }
+
   .nickname {
     a {
       color: black;
     }
+
     padding-left: 15px;
     font-size: 15px;
     font-weight: bold;
   }
-.cardImage{
-  background: lightgrey;
-  border-radius: 50%;
-  padding: 1px;
-}
+
+  .cardImage {
+    background: lightgrey;
+    border-radius: 50%;
+    padding: 1px;
+  }
+
   .cardContent {
     padding: 16px;
   }

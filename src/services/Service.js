@@ -9,30 +9,26 @@ class Service {
     async request(path, data) {
 
         let headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Accept': 'application/json', 'Content-Type': 'application/json',
         };
 
         const token = localStorage.getItem('AUTH_TOKEN');
 
         if (token) {
             headers = {
-                ...headers,
-                'X-Auth-Token': localStorage.getItem('AUTH_TOKEN'),
+                ...headers, 'X-Auth-Token': localStorage.getItem('AUTH_TOKEN'),
             }
         }
 
         if (data?.headers) {
             headers = {
-                ...headers,
-                ...data.headers
+                ...headers, ...data.headers
             }
         }
 
         let httpCode = 200;
         return fetch(`${this.base}${path}`, {
-            headers: headers,
-            ...data
+            headers: headers, ...data
         }).then(res => {
             httpCode = res.status;
             return res.json()
@@ -46,8 +42,7 @@ class Service {
             }
             return res;
         }).catch(error => ({
-            error: true,
-            details: error
+            error: true, details: error
         }));
     }
 }
