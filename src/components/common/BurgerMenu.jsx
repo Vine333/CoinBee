@@ -1,30 +1,16 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import {ICPayment, ICGame, ICSoft, ICEnviro, ICCrypto, ICShop, ICFood} from '/src/assets/SVG/Icons/index.js'
-import {useNavigate} from "react-router-dom";
-import {GlobalStore} from "../../store/index.js";
-import {useLanguage} from "../CustomHook/LanguageContext.jsx";
+import { ICPayment, ICGame, ICSoft, ICEnviro, ICCrypto, ICShop, ICFood } from '/src/assets/SVG/Icons/index.js';
+import { useNavigate } from "react-router-dom";
+import { GlobalStore } from "../../store/index.js";
+import { useLanguage } from "../CustomHook/LanguageContext.jsx";
 
 const BurgerMenu = () => {
-
-
     const navigate = useNavigate();
-
     const menuRef = useRef(null);
-
-    const {__i} = useLanguage();
-
-    const {
-        setSelectedCategory,
-    } = GlobalStore();
-
-    const onNavigateShop = (categoryId) => {
-        navigate('/shop');
-        setSelectedCategory(categoryId)
-    }
-
+    const { __i } = useLanguage();
+    const { setSelectedCategory } = GlobalStore();
     const [isOpen, setIsOpen] = useState(false);
-
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -36,6 +22,10 @@ const BurgerMenu = () => {
         }
     };
 
+    const onNavigateShop = (categoryId) => {
+        navigate('/shop');
+        setSelectedCategory(categoryId)
+    }
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -43,107 +33,108 @@ const BurgerMenu = () => {
         };
     }, []);
 
-    return (<Wrapper>
-        <BurgerIcon onClick={toggleMenu} isOpen={isOpen}>
-            <div></div>
-            <div></div>
-            <div></div>
-        </BurgerIcon>
-        <Menu ref={menuRef} isOpen={isOpen}>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(1)}>
-                    <ICPayment/>
-                    <div className='naming'>  {__i("Payment Cards")}</div>
+    return (
+        <Wrapper isOpen={isOpen}>
+            <div className="burgerIcon" onClick={toggleMenu}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul className="menu" ref={menuRef}>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(1)}>
+                        <ICPayment/>
+                        <div className='naming'>  {__i("Payment Cards")}</div>
 
-                </a>
-            </li>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(2)}>
-                    <ICSoft/>
-                    <div className='naming'>  {__i("Software")}</div>
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(2)}>
+                        <ICSoft/>
+                        <div className='naming'>  {__i("Software")}</div>
 
-                </a>
-            </li>
-            <li>
-                <a onClick={() => onNavigateShop(3)}>
-                    <ICGame/>
-                    <div className='naming'>{__i("Games")}</div>
+                    </a>
+                </li>
+                <li>
+                    <a onClick={() => onNavigateShop(3)}>
+                        <ICGame/>
+                        <div className='naming'>{__i("Games")}</div>
 
-                </a>
-            </li>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(4)}>
-                    <ICFood/>
-                    <div className='naming'>    {__i("Food and Entertainment")}</div>
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(4)}>
+                        <ICFood/>
+                        <div className='naming'>    {__i("Food and Entertainment")}</div>
 
-                </a>
-            </li>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(5)}>
-                    <ICShop/>
-                    <div className='naming'>  {__i("Shopping")}</div>
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(5)}>
+                        <ICShop/>
+                        <div className='naming'>  {__i("Shopping")}</div>
 
-                </a>
-            </li>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(6)}>
-                    <ICCrypto/>
-                    <div className='naming'>  {__i("Cryptocurrency")}</div>
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(6)}>
+                        <ICCrypto/>
+                        <div className='naming'>  {__i("Cryptocurrency")}</div>
 
-                </a>
-            </li>
-            <li className='listItem'>
-                <a onClick={() => onNavigateShop(7)}>
-                    <ICEnviro/>
-                    <div className='naming'>  {__i("Ecology")}</div>
+                    </a>
+                </li>
+                <li className='listItem'>
+                    <a onClick={() => onNavigateShop(7)}>
+                        <ICEnviro/>
+                        <div className='naming'>  {__i("Ecology")}</div>
 
-                </a>
-            </li>
-        </Menu>
-    </Wrapper>);
+                    </a>
+                </li>
+            </ul>
+        </Wrapper>
+    );
 };
 
-export default BurgerMenu;
+
 
 const Wrapper = styled.div`
-  width: 100%;
-  background-color: #fbcc0d;
   position: relative;
+  background-color: #fbcc0d;
   padding: 10px;
-`;
+  width: 100%;
 
-const BurgerIcon = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
+  .burgerIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
 
-  div {
-    width: 100%;
-    height: 4px;
-    background-color: #333;
-    transition: all 0.3s;
+    div {
+      width: 100%;
+      height: 4px;
+      background-color: #333;
+      transition: all 0.3s;
 
-    &:nth-child(1) {
-      transform: ${({isOpen}) => (isOpen ? 'rotate(45deg) translate(5px, 7px)' : 'rotate(0)')}
-    }
+      &:nth-child(1) {
+        transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg) translate(5px, 7px)' : 'rotate(0)')};
+      }
 
-    &:nth-child(2) {
-      opacity: ${({isOpen}) => (isOpen ? 0 : 1)};
-      transform: ${({isOpen}) => (isOpen ? 'translateX(-20px)' : 'translateX(0)')};
-      transition: transform 0.3s, opacity 0.3s;
-    }
+      &:nth-child(2) {
+        opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+        transform: ${({ isOpen }) => (isOpen ? 'translateX(-20px)' : 'translateX(0)')};
+        transition: transform 0.3s, opacity 0.3s;
+      }
 
-    &:nth-child(3) {
-      transform: ${({isOpen}) => (isOpen ? 'rotate(-45deg) translate(4px, -7px)' : 'rotate(0)')};
+      &:nth-child(3) {
+        transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg) translate(4px, -7px)' : 'rotate(0)')};
+      }
     }
   }
-`;
 
-const Menu = styled.ul`
-  list-style: none;
+  .menu {
+   list-style: none;
   padding: 0;
   margin: 0;
   display: ${({isOpen}) => (isOpen ? 'block' : 'none')};
@@ -196,5 +187,5 @@ const Menu = styled.ul`
     &:hover::after {
       background-color: #fbcc0d;
     }
-  }
-`;
+  }`;
+export default BurgerMenu;
