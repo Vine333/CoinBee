@@ -16,12 +16,12 @@ const ShopPage = () => {
     const {
         selectedCountry, setSelectedCountry, selectedCategory, setSelectedCategory, currentPage, setCurrentPage,
     } = useGlobalStore(useShallow(state => ({
-        selectedCategory:state.selectedCategory,
-        setSelectedCategory:state.setSelectedCategory,
-        selectedCountry:state.selectedCountry,
-        setSelectedCountry:state.setSelectedCountry,
-        currentPage:state.currentPage,
-        setCurrentPage:state.setCurrentPage,
+        selectedCategory: state.selectedCategory,
+        setSelectedCategory: state.setSelectedCategory,
+        selectedCountry: state.selectedCountry,
+        setSelectedCountry: state.setSelectedCountry,
+        currentPage: state.currentPage,
+        setCurrentPage: state.setCurrentPage,
     })));
 
     const {
@@ -44,25 +44,6 @@ const ShopPage = () => {
         isLoad: state.isLoad, categories: state.categories, loadCategories: state.loadCategories,
     })));
 
-
-    const handleCountryChange = useCallback((value) => {
-        setSelectedCountry(value);
-        updateUrl(value, selectedCountry);
-    }, [selectedCountry]);
-
-    const handleCategoryChange = useCallback((category) => {
-        setSelectedCategory(category.id);
-        updateUrl(selectedCategory, category.id);
-    }, [selectedCategory]);
-
-    const handlePageChange = useCallback((page) => {
-        setCurrentPage(page);
-        if (selectedCountry) {
-            loadProducts(selectedCountry, selectedCategory, page);
-        }
-    }, [selectedCountry, selectedCategory, setCurrentPage, loadProducts]);
-
-
     const updateUrl = (country, category, page) => {
         const params = new URLSearchParams();
         if (country) {
@@ -75,7 +56,7 @@ const ShopPage = () => {
         navigate(`${location.pathname}?${params.toString()}`);
     };
 
-   const showCategories=(categories)=> {
+    const showCategories = (categories) => {
         const filteredCategories = categories.filter(category => category.products_count > 0);
 
 
@@ -114,6 +95,22 @@ const ShopPage = () => {
         }
     }, [selectedCountry, selectedCategory, currentPage, resetProducts, loadProducts, pageSize]);
 
+    const handleCountryChange = useCallback((value) => {
+        setSelectedCountry(value);
+        updateUrl(value, selectedCountry);
+    }, [selectedCountry]);
+
+    const handleCategoryChange = useCallback((category) => {
+        setSelectedCategory(category.id);
+        updateUrl(selectedCategory, category.id);
+    }, [selectedCategory]);
+
+    const handlePageChange = useCallback((page) => {
+        setCurrentPage(page);
+        if (selectedCountry) {
+            loadProducts(selectedCountry, selectedCategory, page);
+        }
+    }, [selectedCountry, selectedCategory, setCurrentPage, loadProducts]);
 
     return (<AppLayout>
         <Wrapper>
@@ -154,45 +151,45 @@ const ShopPage = () => {
 
                             <List
 
-                            dataSource={showCategories(categories)}
-                            renderItem={category => (<List.Item
-                                key={category.id}
-                                style={{
-                                    cursor: 'pointer',
-                                    marginBottom: '8px',
-                                    borderBottom: selectedCategory === category.id ? '2px solid #fbcc0d' : 'none',
-                                }}
-                                onClick={() => handleCategoryChange(category)}
-                            >
-                                <Space>
-                                    <img
-                                        src={category.icon_url}
-                                        alt={category.name}
-                                        style={{width: '20px', marginRight: '8px'}}
-                                    />
-                                    <span>{category.name}</span>
-                                    <span>{category.products_count}</span>
-                                </Space>
-                            </List.Item>)}
-                        />)}
+                                dataSource={showCategories(categories)}
+                                renderItem={category => (<List.Item
+                                    key={category.id}
+                                    style={{
+                                        cursor: 'pointer',
+                                        marginBottom: '8px',
+                                        borderBottom: selectedCategory === category.id ? '2px solid #fbcc0d' : 'none',
+                                    }}
+                                    onClick={() => handleCategoryChange(category)}
+                                >
+                                    <Space>
+                                        <img
+                                            src={category.icon_url}
+                                            alt={category.name}
+                                            style={{width: '20px', marginRight: '8px'}}
+                                        />
+                                        <span>{category.name}</span>
+                                        <span>{category.products_count}</span>
+                                    </Space>
+                                </List.Item>)}
+                            />)}
                     </div>
                 </div>
 
                 <div className="resultProducts">
                     <div className='cardsProduct'>
-                    {isLoadingProducts ? (<Spin size="large"/>) : (product.map(product => (<Card
-                        key={`${product.id}-${product.name}`}
-                        title={product.name}
-                        style={{width: '300px', marginBottom: '16px'}}
-                        cover={<img src={product.logo_url} alt={product.name} style={{width: '100%'}}/>}
-                    >
-                        <div >
-                            <p>{product.country.name}</p>
-                            <p style={{fontSize: '20px'}}>
-                                {product.price_list_usd[0]}$ {product.currency}
-                            </p>
-                        </div>
-                    </Card>)))}
+                        {isLoadingProducts ? (<Spin size="large"/>) : (product.map(product => (<Card
+                            key={`${product.id}-${product.name}`}
+                            title={product.name}
+                            style={{width: '300px', marginBottom: '16px'}}
+                            cover={<img src={product.logo_url} alt={product.name} style={{width: '100%'}}/>}
+                        >
+                            <div>
+                                <p>{product.country.name}</p>
+                                <p style={{fontSize: '20px'}}>
+                                    {product.price_list_usd[0]}$ {product.currency}
+                                </p>
+                            </div>
+                        </Card>)))}
                     </div>
                     <Pagination
                         rootClassName='myPagination'
@@ -217,12 +214,14 @@ const Wrapper = styled.div`
     text-align: center;
     margin-bottom: 20px;
   }
-.cardsProduct{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 15px;
-}
+
+  .cardsProduct {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
   .container {
     display: flex;
     justify-content: space-evenly;
