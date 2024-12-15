@@ -1,8 +1,8 @@
 import useProductStore from "./useProductStore.js";
-import useCategorieStore from "./useCategorieStore.js";
+import useCategoryStore from "./useCategoryStore.js";
 import useCountryStore from "./useCountryStore.js";
-import GlobalStore from "./useGlobalStore.js";
+import useGlobalStore from "./useGlobalStore.js";
 
 export {
-    useCountryStore, useCategorieStore, useProductStore, GlobalStore,
+    useCountryStore, useCategoryStore, useProductStore, useGlobalStore,
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import {Logo} from '/src/assets/SVG/Icons/index.js'
-import {useLanguage} from "../CustomHook/LanguageContext.jsx";
+import {ICLogo} from '/src/icons/index.js'
+import {useLanguage} from "../../hooks/useTranslate.jsx";
 
 
 const Footer = () => {
@@ -65,7 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className='footerLogo'>
-                    <Logo/>
+                    <ICLogo/>
                     <p>Honey for your crypto money</p>
                 </div>
             </div>
@@ -112,12 +112,17 @@ const Wrapper = styled.div`
   width: 100%;
   background-color: #333e4d;
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .container {
     display: flex;
     flex-direction: column;
-    padding: 10px 24px 0;
-
+    padding: 30px;
+max-width: 1540px;
+    align-items: center;
+    justify-content: center;
   }
 
   .footerLanguage {

@@ -6,7 +6,7 @@ const useProductStore = (set, get)=>({
     product:[],
     isAtEnd: false,
    totalProducts:0,
-   pageSize:0,
+   pageSize:[],
 
     async loadProducts(country,category_id,page,pageSize){
 

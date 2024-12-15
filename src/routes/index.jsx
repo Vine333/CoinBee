@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import MainPage from "../pages/main/MainPage.jsx";
-import ShopPage from "../pages/main/ShopPage.jsx";
-import AuthPage from "../pages/main/AuthPage.jsx";
+import MainPage from "../components/Home/MainPage.jsx";
+import ShopPage from "../components/Shop/ShopPage.jsx";
+import AuthPage from "../components/Auth/AuthPage.jsx";
 
 
 const AppRoutes = () => {

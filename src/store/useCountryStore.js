@@ -10,7 +10,7 @@ const useCountryStore = (set, get) => ({
             isLoading: true,
         })
 
-        const response = await CountryService.Country()
+        const response = await CountryService.Countries()
 
 
         set({

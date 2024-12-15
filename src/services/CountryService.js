@@ -1,7 +1,7 @@
 import Service from "./Service.js";
 
 class CountryService extends Service {
-    async Country() {
+    async Countries() {
         return this.request(`/countries`)
     }
 

@@ -82,7 +82,7 @@ export const translations = {
         "Buy your next laptop or iPhone": "Buy your next laptop or iPhone easily with Bitcoin by purchasing a gift card from  <a href=\"/ru/gift-cards/electronics/mediamarkt\">Media Markt</a>, <a href=\"/ru/gift-cards/e-commerce/coolblue\">Coolblue</a>, <a href=\"/ru/gift-cards/electronics/currys-pc-world\">Currys PC World</a>PC World or other electronic stores.",
         'Is it possible to buy airline tickets with Bitcoin?': 'Is it possible to buy airline tickets with Bitcoin?',
         "You can now pay for your next flight with Bitcoin": "You can now pay for your next flight with Bitcoin by purchasing a gift card from<a href=\"/ru/gift-cards/travel/delta-air-lines\">Delta Air Lines</a>, <a href=\"/ru/gift-cards/travel/air-canada\">Air Canada</a>, <a href=\"/ru/gift-cards/travel/flight-centre\">Flight Centre</a> or <a href=\"/ru/gift-cards/travel/airlinegift\">AirlineGift</a> and other airlines and holiday websites.",
-
+        "Choices Language":"Choices Language"
 
     }, ru: {
 
@@ -168,7 +168,7 @@ export const translations = {
         "Cryptocurrency": "Криптовалюта",
         "Ecology": "Экология",
         'Categories': 'Категории',
-
+        "Choices Language":'Выберете язык'
     },
 };
 
