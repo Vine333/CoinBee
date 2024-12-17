@@ -1,39 +1,28 @@
-import React, { createContext, useContext, useCallback, useEffect } from "react";
+// components/LanguageProvider.js
+import React, { useCallback } from "react";
 import { translations } from "/public/locales/Translations.js";
 import { useGlobalStore } from "../store/index.js";
 import { useShallow } from "zustand/react/shallow";
 
-const UseTranslate = createContext();
 
-export const LanguageProvider = ({ children }) => {
-    const { language, setLanguage } = useGlobalStore(useShallow((state) => ({
-        language: state.language,
-        setLanguage: state.setLanguage
-    })));
-
-
-    useEffect(() => {
-        const storedLanguage = localStorage.getItem("language");
-        if (storedLanguage && storedLanguage !== language) {
-            setLanguage(storedLanguage);
-        }
-    }, [setLanguage, language]);
-
+export const useLanguage = () => {
+    const { language, setLanguage } = useGlobalStore(
+        useShallow((state) => ({
+            language: state.language,
+            setLanguage: state.setLanguage,
+        }))
+    );
 
     const changeLanguage = (lang) => {
         setLanguage(lang);
-        localStorage.setItem("language", lang);
     };
 
-    const __i = useCallback((text) => {
-        return translations[language]?.[text] || text;
-    }, [language]);
-
-    return (
-        <UseTranslate.Provider value={{ changeLanguage, language, __i }}>
-            {children}
-        </UseTranslate.Provider>
+    const __i = useCallback(
+        (text) => {
+            return translations[language]?.[text] || text;
+        },
+        [language]
     );
-};
 
-export const useLanguage = () => useContext(UseTranslate);
+    return { language, changeLanguage, __i };
+};
